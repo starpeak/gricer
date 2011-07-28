@@ -1,0 +1,233 @@
+@import 'helpers/css3';
+
+.gricer-stat {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: none;
+  font-size: 11px;
+  line-height: 15px;
+  font-family: 'Lucida Grande', 'Arial', 'Helvetica', 'Sans-Serif';
+  
+  #gricer-header {
+    background: #000;
+    color: #000;
+    line-height: 20px;
+    height: 20px;
+    background: #eee;
+    @include gradient(#eee,#ccc);
+    
+    .path {      
+      a {
+        display: block;
+        float: left;
+        color: #000;
+        background: image-url("gricer/fluid/breadcrumb.png") right top no-repeat;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 15px 0 8px;
+      }
+      
+      a:last-child {
+        font-weight: bold;
+      }
+    }
+    
+    .dates {
+      padding: 0 7px;
+      float: right;
+      input {
+        width: 8em;
+        height: 11px;
+        padding: 2px;
+        border: none;
+        background: transparent;
+      }
+      #gricer-from-field {
+        text-align: right;
+      }
+    }
+  }
+  
+  #gricer-menu {
+    position: absolute;
+    float: left;
+    width: 182px;
+    padding: 4px 0;
+    background: #dfe4eb;
+    border-right: 1px solid #b4b4b4;
+    top: 20px;
+    
+    bottom: 0;
+    overflow: auto;
+    
+    a, span {
+      display: block;
+      text-decoration: none;
+      color: #000;
+      border-top: 1px solid transparent;
+      padding: 2px 8px;
+      &.active {
+        border-top: 1px solid #a3b1cc;
+        background: #94a6c5;
+        @include gradient(#b0bed7, #8195b8);
+        color: #fff;
+      }
+    }
+    
+    span {
+      color: #999;
+      font-weight: bold;
+    }
+    
+    div a {
+      padding-left: 16px;
+    }
+  }
+  
+  #gricer-container
+  {
+    position: absolute;
+    float: left;
+    left: 183px;
+    top: 20px;
+    right: 0;
+    bottom: 0;
+  }
+  
+  
+  #gricer-container {
+    
+    .overview {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      overflow: auto;
+      padding: 4px 8px;
+      font-size: 30px;
+      line-height: 45px;
+    }
+    
+    .flot-chart {
+      position: absolute;
+      background: #666f83;
+      color: #999;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 0 2.5%;
+      height: 250px;
+      #flot-line-chart, #flot-pie-chart {
+        width: 100%;
+        height: 250px;
+      }
+      
+    }
+    
+    .type-selector {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      
+
+      span, a {
+        padding: 2px 4px;
+        background: #ccc;
+        @include gradient(#ddd, #bbb);
+        border-right: 1px solid #b4b4b4;
+        color: #000;
+      }
+      
+      span {
+        background: #666;
+        @include gradient(#555, #777);
+        color: #fff;
+      }
+
+      span:first-child,
+      a:first-child {
+        @include border-radius(9px 0 0 9px);
+        padding-left: 9px;
+      }
+      
+      span:last-child,
+      a:last-child {
+        @include border-radius(0 9px 9px 0);
+        border-right: none;
+        padding-right: 9px;
+      }
+    }
+     
+    .data {    
+      position: absolute;
+      top: 250px;
+      bottom: 0;
+      width: 100%;
+      overflow: auto;
+    }
+    table {  
+      width: 100%;
+      padding: 0;
+      border-spacing: 0;
+      empty-cells: show;
+
+      th, td {
+        width: auto;
+        padding: 2px 4px;
+        
+        .badge {
+          float: left;
+          display: block;
+          @include border-radius(5px);
+          margin: 3px;
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      tr:nth-child(even) {
+        th, td {
+          background-color: #f3f5fa; 
+          white-space: nowrap;
+        }
+      }
+
+      tr:first-child {        
+        th {
+          background: #eee;
+          @include gradient(#ccc,#eee);
+          border-bottom: 1px solid #b4b4b4;
+          border-right: 1px solid #b4b4b4;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+
+      th.number,
+      td.number {
+        text-align: right;
+      }
+
+      th.boolean,
+      td.boolean {
+        max-width: 30px;
+      }
+
+      td.boolean {
+        text-align: center;
+      }
+      
+      &.process {
+        tr:nth-child(1) {
+          th {
+            text-align: center;
+            font-size: 9px;
+            lin-height: 11px;
+          }
+        }
+      }
+    }
+  }
+}

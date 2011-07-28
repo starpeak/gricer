@@ -1,0 +1,33 @@
+<div class='overview'>
+  <h2>
+    Overview for <%=l @stat_from%>
+    <% unless @stat_from == @stat_thru -%>
+      to <%=l @stat_thru%>
+    <% end -%>
+  </h2>
+  
+  <p>
+    <% sessions_count = sessions.count.try(:to_f) -%>
+    <%=t '.sessions', count: sessions_count.to_i %> 
+  </p>
+  <p>
+    <%=t '.new_sessions', count: sessions.new_visits.count %> 
+  </p>
+  <p>
+    <%=t '.new_visitors', percentage: format_percentage(sessions.new_visitors) %>
+  </p>
+  <p>
+    <% request_count = requests.count.try(:to_f) -%>
+    <%=t '.requests', count: request_count.to_i %> 
+  </p>
+  <p>
+    <%=t '.requests_per_session', count: '%3.2f' %  sessions.requests_per_session %> 
+  </p>
+
+  <p>
+    <%=t '.bounce_rate', percentage: format_percentage(sessions.bounce_rate) %>
+  </p>
+  <p>
+    <%=t '.avg_duration', time: format_seconds(sessions.avg_duration) %>
+  </p>
+</div>

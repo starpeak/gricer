@@ -1,0 +1,236 @@
+<h1>Gricer Request tracker</h1>
+
+<table>
+  <tr>
+    <td colspan='2'><h2>Request</h2></td>
+  </tr>
+  
+  <tr>
+    <th>Requested at:</th>
+    <td><%=l gricer_request.created_at%></td>
+  </tr> 
+  
+  
+  <tr>
+    <th>Host:</th>
+    <td><%= gricer_request.host %></td>
+  </tr>
+  <tr>
+    <th>Path:</th>
+    <td><%= gricer_request.path %></td>
+  </tr>
+  <tr>
+    <th>Request Method:</th>
+    <td><%= gricer_request.method %></td>
+  </tr>
+  <tr>
+    <th>Request Protocol:</th>
+    <td><%= gricer_request.protocol %></td>
+  </tr>
+  
+  <tr>
+    <th>Refererer Protocol:</th>
+    <td><%= gricer_request.referer_protocol %></td>
+  </tr>
+  <tr>
+    <th>Refererer Host:</th>
+    <td><%= gricer_request.referer_host %></td>
+  </tr>
+  <tr>
+    <th>Refererer Path:</th>
+    <td><%= gricer_request.referer_path %></td>
+  </tr>
+  <tr>
+    <th>Refererer Params:</th>
+    <td><%= gricer_request.referer_params %></td>
+  </tr>
+  <tr>
+    <th>Refering Search Engine:</th>
+    <td><%= gricer_request.search_engine %></td>
+  </tr> 
+  <tr>
+    <th>Search Engine Query:</th>
+    <td><%= gricer_request.search_query %></td>
+  </tr> 
+  
+  <tr>
+    <th>First in Session:</th>
+    <td><%= gricer_request.is_first_in_session %></td>
+  </tr> 
+  
+  <tr>
+    <th>Controller:</th>
+    <td><%= gricer_request.controller %></td>
+  </tr>
+  <tr>
+    <th>Action:</th>
+    <td><%= gricer_request.action %></td>
+  </tr>
+  <tr>
+    <th>Format:</th>
+    <td><%= gricer_request.format %></td>
+  </tr>
+  <tr>
+    <th>Param ID:</th>
+    <td><%= gricer_request.param_id %></td>
+  </tr>
+  <tr>
+    <th>Locale:</th>
+    <td><%= gricer_request.locale %></td>
+  </tr>  
+  <tr>
+    <th>User:</th>
+    <td><%= gricer_request.user_id %></td>
+  </tr>
+  
+  <!-- JS values -->
+  <tr>
+    <th>Javascript:</th>
+    <td class="gricer-js">disabled</td>
+  </tr>
+  <tr>
+    <th>Window Size:</th>
+    <td id="gricer-w">N/A</td>
+  </tr>
+  
+  <tr>
+    <td colspan='2'><h2>Agent</h2></td>
+  </tr>
+
+  <tr>
+    <th>Request Header:</th>
+    <td><%= gricer_request.agent.request_header %></td>
+  </tr>
+  <tr>
+    <th>Name:</th>
+    <td><%= gricer_request.agent.name %></td>
+  </tr>
+  <tr>
+    <th>Version:</th>
+    <td><%= gricer_request.agent.full_version %></td>
+  </tr>
+  <tr>
+    <th>Major Version:</th>
+    <td><%= gricer_request.agent.major_version %></td>
+  </tr>
+  <tr>
+    <th>Engine:</th>
+    <td><%= gricer_request.agent.engine_name %></td>
+  </tr>
+  <tr>
+    <th>Engine Version:</th>
+    <td><%= gricer_request.agent.engine_version %></td>
+  </tr>
+  <tr>
+    <th>OS:</th>
+    <td><%= gricer_request.agent.os %></td>
+  </tr>
+  <tr>
+    <th>Type:</th>
+    <td><%= gricer_request.agent.agent_class.to_s.humanize %></td>
+  </tr>
+  <tr>
+    <th>Number of Requests:</th>
+    <td><%= gricer_request.agent.requests_count.to_i + 1 %></td>
+  </tr>
+  <tr>
+    <th>Number of Sessions:</th>
+    <td><%= gricer_request.agent.sessions_count.to_i + ( gricer_request.is_first_in_session ? 1 : 0 ) %></td>
+  </tr>
+
+  <tr>
+    <td colspan='2'><h2>Session</h2></td>
+  </tr>
+
+  <tr>
+    <th>IP Hash:</th>
+    <td><%= gricer_request.session.ip_address_hash %></td>
+  </tr>
+  <tr>
+    <th>Domain:</th>
+    <td><%= gricer_request.session.domain %></td>
+  </tr>
+  <tr>
+    <th>Country:</th>
+    <td><%= gricer_request.session.country %></td>
+  </tr>
+  <tr>
+    <th>Requested Locale:</th>
+    <td><%= gricer_request.session.requested_locale %></td>
+  </tr>
+  <tr>
+    <th>Region:</th>
+    <td><%= gricer_request.session.region %></td>
+  </tr>
+  <tr>
+    <th>City:</th>
+    <td><%= gricer_request.session.city %></td>
+  </tr>
+  <tr>
+    <th>Postal Code:</th>
+    <td><%= gricer_request.session.postal_code %></td>
+  </tr>
+  <tr>
+    <th>Longitude:</th>
+    <td><%= gricer_request.session.longitude %></td>
+  </tr>
+  <tr>
+    <th>Latitude:</th>
+    <td><%= gricer_request.session.latitude %></td>
+  </tr>
+  <tr>
+    <th>Number of Requests:</th>
+    <td><%= gricer_request.session.requests_count.to_i + 1 %></td>
+  </tr>
+  <tr>
+    <th>Visitor Type:</th>
+    <td><%= gricer_request.session.previous_session_id ? 'Returning Visitor' : 'New Visitor' %></td>
+  </tr> 
+  <tr>
+    <th>Started at:</th>
+    <td><%=l gricer_request.session.created_at %></td>
+  </tr>
+  <tr>
+    <th>Duration:</th>
+    <td><%=format_seconds gricer_request.session.duration %></td>
+  </tr>
+  
+  <!-- JS values -->
+  <tr>
+    <th>Javascript:</th>
+    <td class="gricer-js">disabled</td>
+  </tr>
+  <tr>
+    <th>Java:</th>
+    <td id="gricer-j">N/A</td>
+  </tr>
+  <tr>
+    <th>Flash:</th>
+    <td id="gricer-f">N/A</td>
+  </tr>
+  <tr>
+    <th>Silverlight:</th>
+    <td id="gricer-sl">N/A</td>
+  </tr>
+  <tr>
+    <th>Screen Size:</th>
+    <td id="gricer-s">N/A</td>
+  </tr>
+  <tr>
+    <th>Screen Depth:</th>
+    <td id="gricer-sd">N/A</td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  $(function() {
+    var values = Gricer.prepareValues();
+    $('.gricer-js').html('enabled');
+    $('#gricer-j').html(values.j ? 'true' : 'false');
+    $('#gricer-f').html(values.f ? values.f : 'false');
+    $('#gricer-sl').html(values.sl ? values.sl : 'false');
+    $('#gricer-s').html(values.sx + 'x' + values.sy);
+    $('#gricer-sd').html(values.sd);
+    $('#gricer-w').html(values.wx + 'x' + values.wy);
+  });
+</script>

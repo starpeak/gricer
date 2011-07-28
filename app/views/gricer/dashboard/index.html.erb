@@ -1,0 +1,19 @@
+<div class="gricer-stat">
+  <div id="gricer-header">
+    <span class="path"></span>
+    <span class="dates">
+      <%= form_tag do -%>
+        <%= text_field_tag :from, @stat_from, id: 'gricer-from-field' -%>
+        -
+        <%= text_field_tag :thru, @stat_thru, id: 'gricer-thru-field' %>
+      <% end -%>
+    </span>
+  </div>
+  <div id="gricer-menu">
+    <%= render 'menu', items: ::Gricer.config.admin_menu %>  
+  </div>
+
+  <div id="gricer-container"></div>
+  
+  <%= javascript_include_tag :gricer_backend_jquery %>
+</div>

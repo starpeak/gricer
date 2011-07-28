@@ -1,0 +1,19 @@
+en:
+  gricer:
+    description: 'Gricer Web Analysis'
+    dashboard:
+      overview:
+        title: 'Gricer Dashboard'
+        sessions: 
+          one: '%{count} Visit'
+          other: '%{count} Visits'
+        requests:
+          one: '%{count} Page Call'
+          other: '%{count} Page Calls'
+        requests_per_session: '%{count} Pages/Visit'
+        bounce_rate: '%{percentage} Bounce Rate'
+        avg_duration: '%{time} Average Duration of Visits'
+        new_visitors: '%{percentage} New Visitors'
+        new_sessions:
+          one: '%{count} new Visitor'
+          other: '%{count} new Visitors'

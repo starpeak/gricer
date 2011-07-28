@@ -1,0 +1,85 @@
+= Gricer
+
+Web Analytics Tool for Rails 3.1
+
+== Installation
+
+* Add Gricer to your Rails application's Gemfile:
+
+    gem 'rails',     '>=3.1rc5'
+    gem 'gricer',    git: 'https://github.com/gmah/gricer.git'
+
+* Include the Gricer's CSS theme to your Rails 3 asset chain (e.g. your application.css[.scss]):
+
+    /*
+     ...
+     *= require gricer/fluid
+     ...
+     */
+     
+  If you are using jquery you may add the default theme unless you use your own jquery-ui theme:
+      
+     *= require gricer/fluid-jquery-ui
+     
+  At the moment there is only the fluid theme. More will come with the time.
+  
+* Include the Gricer's JS files to your Rails 3 asset chain (e.g. your application.js):
+    
+    //= require gricer
+    
+  For the backend you need some more JS files (the jquery-ui is optional):
+    
+    //= require jquery
+    //= require jquery-ui
+    //= require jquery_ujs
+    //= require gricer_backend_jquery
+    
+* Add the Gricer's hook to your controllers (or your ApplicationController if you want to track all controllers):
+
+    class ApplicationController < ActionController::Base
+      ...
+      gricer_track_requests
+      ...
+    end
+    
+* To track values captured by javascript (Flash, Silverlight, screen resolution, ...) add to the end of your layout file:
+
+    <%= gricer_track_tag %>
+    
+* Migrate your DB:
+
+    rake db:migrate
+    
+== Geocoding your visitors    
+    
+* If you want to geocode your visitors add geoip-c to your Gemfile:
+
+    gem 'geoip-c'
+
+* Configure Gricer to use GeoIP (e.g. in an initializer)
+    
+    require 'geoip'
+
+    Gricer.configure do |config|
+      config.geoip_db = GeoIP::City.new("#{PATH_TO_YOUR_GEOIP_DB}/GeoLiteCity.dat", :index, false)    
+    end
+    
+== API Documentation
+
+* API Documentation can be created by running 
+    rake rdoc
+  from the Gricer project directory.
+* There is an auto-generated, up-to-the-hour online_documentation[http://gricer.org/api] of the API Documentation.
+    
+  
+== Note on Patches/Pull Requests
+
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. No discussion. No tests, no game. We use rspec and cucumber with associated addons.
+* Commit, do not mess with rakefile, version, or history. If you want to have your own version, thats fine. But bump your version in a seperate commit that can be ignored when pulling.
+* Send me a pull request. Bonus points for topic branches.
+
+== Copyright
+
+Copyright (c) 2011 Sven G. Brönstrup. See MIT-LICENSE for details.
