@@ -63,12 +63,13 @@ window.Gricer =
     if typeof( window.innerWidth ) == 'number' 
       # Non-IE
       return {width: window.innerWidth, height: window.innerHeight}
-    else if _ref = document.documentElement and ( _ref.clientWidth or _ref.clientHeight )
+    else if _ref = document.documentElement?.clientWidth
       # IE 6+ in 'standards compliant mode'
       return {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight}
-    else if _ref = document.body and ( _ref.clientWidth or _ref.clientHeight )
+    else if _ref = document.body?.clientWidth 
       # IE 4 compatible
       return {width: document.body.clientWidth, height: document.body.clientHeight}
+      
   prepareValues: ->
     windowsize = Gricer.getWindowSize()
     
