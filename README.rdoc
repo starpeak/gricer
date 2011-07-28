@@ -48,7 +48,7 @@ Web Analytics Tool for Rails 3.1
     
 * Migrate your DB:
 
-    rake db:migrate
+    bundle exec rake db:migrate
     
 == Geocoding your visitors    
     
