@@ -30,7 +30,7 @@ module Gricer
       
       self.ip_address   = request.remote_ip
       self.agent_header = request.headers['HTTP_USER_AGENT']
-      self.referer      = request.headers['HTTP_REFERER']
+      self.referer      = request.headers['HTTP_X_FORWARDED_REFERER'] || request.headers['HTTP_REFERER']
       
       logger.debug '(1)'
       
