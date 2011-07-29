@@ -70,7 +70,7 @@ module Gricer
         self.referer_params = nil if referer_params.blank?
         
         # Detect Search Engines
-        if referer_host =~ /^www\.google(?:\.com?)?(?:\.[a-z]{2})?$/ and referer_path == '/search'
+        if referer_host =~ /^www\.google(?:\.com?)?(?:\.[a-z]{2})?$/ and ['/search', '/url'].include? referer_path
           self.search_engine = 'Google'
           params = CGI::parse(referer_params)
           self.search_query = params['q'].try(:first)    
