@@ -322,7 +322,7 @@ $('#gricer-menu a').live 'click', ->
   return false
   
 jQuery ->
-  $('#gricer-menu a:first').click();
+  $('#gricer-menu a:first')?.click();
   
   if $.datepicker != undefined
     dates = $('#gricer-from-field, #gricer-thru-field').datepicker
