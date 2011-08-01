@@ -68,40 +68,34 @@ module Gricer
         self.referer_host = referer_host.try(:downcase)
         self.referer_path = '/' if referer_path.blank?
         self.referer_params = nil if referer_params.blank?
+        params = CGI::parse(referer_params) unless referer_params.blank?
         
         # Detect Search Engines
         if referer_host =~ /^www\.google(?:\.com?)?(?:\.[a-z]{2})?$/ and ['/search', '/url'].include? referer_path
           self.search_engine = 'Google'
-          params = CGI::parse(referer_params)
           self.search_query = params['q'].try(:first)    
         elsif referer_host == 'www.bing.com' and referer_path == '/search'
           self.search_engine = 'Bing'
-          params = CGI::parse(referer_params)
           self.search_query = params['q'].try(:first)
         elsif referer_host =~ /search\.yahoo\.com$/ and referer_path =~ /\/search;/
           self.search_engine = 'Yahoo'
-          params = CGI::parse(referer_params)
           self.search_query = params['p'].try(:first)
         elsif referer_host == 'www.baidu.com' and referer_path == '/s'
           self.search_engine = 'Baidu'
-          params = CGI::parse(referer_params)
           self.search_query = params['wd'].try(:first)
         elsif referer_host =~ /ask\.com$/ and referer_path =~ /^\/web/
           self.search_engine = 'Ask'
-          params = CGI::parse(referer_params)
           self.search_query = params['q'].try(:first)
         elsif referer_host == 'search.aol.com' and referer_path == '/aol/search'
           self.search_engine = 'AOL'
-          params = CGI::parse(referer_params)
           self.search_query = params['q'].try(:first)
-        elsif referer_host == 'www.metacrawler.com' and referer_path =~ /search\/web/
+        elsif referer_host =~ /metacrawler\.com$/ and referer_path =~ /search\/web/
           self.search_engine = 'MetaCrawler'
-          params = CGI::parse(referer_params)
           self.search_query = params['q'].try(:first)
-        elsif referer_host == 'www.dogpile.com' and referer_path =~ /dogpile\/ws\/results\/Web\//
+        elsif referer_host =~ /dogpile\.com/ and referer_path =~ /dogpile\/ws\/results\/Web\//
           self.search_engine = 'Dogpile'
           void, self.search_query = referer_path.match(/ws\/results\/Web\/([^\/]*)\//).to_a
-          self.search_query = CGI::unescape(self.search_query)
+          self.search_query = CGI::unescape(self.search_query).gsub('!FE', '.')
         end
       end
     end
