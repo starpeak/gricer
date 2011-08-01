@@ -27,6 +27,7 @@
         height: 20px;
         line-height: 20px;
         padding: 0 15px 0 8px;
+        text-decoration: none;
       }
       
       a:last-child {
@@ -130,7 +131,6 @@
       position: absolute;
       right: 4px;
       top: 4px;
-      
 
       span, a {
         padding: 2px 4px;
@@ -138,6 +138,7 @@
         @include gradient(#ddd, #bbb);
         border-right: 1px solid #b4b4b4;
         color: #000;
+        text-decoration: none;
       }
       
       span {
@@ -177,6 +178,11 @@
         width: auto;
         padding: 2px 4px;
         font-size: 11px;
+        
+        a {
+          color: #009;
+          text-decoration: none;
+        }
         
         .badge {
           float: left;
