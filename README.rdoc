@@ -27,12 +27,11 @@ Web Analytics Tool for Rails 3.1
     
     //= require gricer
     
-  For the backend you need some more JS files (the jquery-ui is optional):
+  For the backend you need to include jquery JS files (the jquery-ui is optional):
     
     //= require jquery
     //= require jquery-ui
     //= require jquery_ujs
-    //= require gricer_backend_jquery
     
 * Add the Gricer's hook to your controllers (or your ApplicationController if you want to track all controllers):
 
