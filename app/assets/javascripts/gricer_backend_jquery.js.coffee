@@ -67,7 +67,7 @@ $.gricer =
     for alt in alternatives
       do(alt) ->
         if alt.uri
-          container.append($('<a>').attr('href', alt.uri).addClass(alt.type).attr('data-gricer-' + alt.type, true).append(alt.type))
+          container.append($('<a>').attr('href', alt.uri).addClass(alt.type).attr('data-gricer-' + alt.type, true).attr('data-label', alt.type).attr('data-type-selector', true).append(alt.type))
         else
           container.append($('<span>').addClass(alt.type).append(alt.type))
     
@@ -90,16 +90,18 @@ $.gricer =
   updateBreadcrumb: (elem) ->
     $.gricer.last_called = $(elem)
     
+    label = $(elem).text() || $(elem).attr('data-label')
+    
     if $(elem).parents('#gricer-menu').length > 0
-      $('#gricer-header .path').html( $(elem).clone() )
+      $('#gricer-header .path').empty()
     else if $(elem).parents('#gricer-header .path').length > 0
       $(elem).nextAll().remove()
-    else if $(elem).parent('.type-selector').length > 0
-      link = $('#gricer-header .path a:last').html()
+      return
+    else if $(elem).attr('data-type-selector')
+      label = $('#gricer-header .path a:last').attr('data-label')
       $('#gricer-header .path a:last').remove()
-      $('#gricer-header .path').append( $(elem).clone().html(link))
-    else
-      $('#gricer-header .path').append( $(elem).clone() )
+  
+    $('#gricer-header .path').append( $(elem).clone().attr('data-label', label).html(label) )
   
 $('a[data-gricer-process]').live 'click', ->
   $.gricer.loading()
@@ -155,7 +157,7 @@ $('a[data-gricer-process]').live 'click', ->
           
         label = label_row = $('<td>')
         if data.detail_uri
-          label = $('<a data-gricer-process="true">').attr('href', data.detail_uri.replace('%25%7Bself%7D', encodeURI(key)))
+          label = $('<a data-gricer-process="true"></a>').attr('href', data.detail_uri.replace('%25%7Bself%7D', encodeURI(key)))
           label_row.append(label)
       
         if graph
@@ -163,7 +165,9 @@ $('a[data-gricer-process]').live 'click', ->
         else
           label.append($('<span class="badge">'))
           
-        label.append($.gricer.labelFor key)
+        lable_text = $.gricer.labelFor key
+        label.attr('data-label', lable_text)
+        label.append(lable_text)
       
         row = $('<tr>').append( label_row )
         
@@ -235,7 +239,7 @@ $('a[data-gricer-spread]').live 'click', ->
           graph = data.data.length < 4 or $.gricer.colors[i] and line[1]/data.total > 0.05 
           label = label_row = $('<td>')
           if data.detail_uri
-            label = $('<a data-gricer-spread="true">').attr('href', data.detail_uri.replace('%25%7Bself%7D', encodeURI(line[0])))
+            label = $('<a data-gricer-spread="true"></a>').attr('href', data.detail_uri.replace('%25%7Bself%7D', encodeURI(line[0])))
             label_row.append(label)
           
           if graph
@@ -243,8 +247,10 @@ $('a[data-gricer-spread]').live 'click', ->
           else
             label.append($('<span class="badge">'))
           
-          label.append($.gricer.labelFor line[0])
-        
+          label_text = $.gricer.labelFor(line[0])
+          label.attr('data-label', label_text)
+          label.append(label_text)
+                 
           row = $('<tr>')
           .append( label_row )
           .append( $('<td class="number">').append(line[1]) )
