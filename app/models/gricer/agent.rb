@@ -94,7 +94,7 @@ module Gricer
   			    self.os = 'Windows Mobile'
   			  elsif os == 'Linux' and agent_string =~ /Maemo/
   			    self.os = 'Maemo'
-  			  elsif agent_string =~ /iPhone/
+  			  elsif agent_string =~ /iPhone/ or agent_string =~ /iPad/ or agent_string =~ /iPod/
   			    self.os = 'iOS'
 			    end
 			  elsif os == 'Symbian'
@@ -394,8 +394,6 @@ module Gricer
 			    self.os = nil
 			    self.agent_class = :mobile_browser
 			  end
-				
-			
 
 				
 			# Rare Browsers

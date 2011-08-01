@@ -707,6 +707,7 @@ describe Gricer::Agent do
       ['Opera/9.60 (J2ME/MIDP; Opera Mini/4.1.11320/608; U; en) Presto/2.2.0', 'Opera Mini', '4.1.11320', '4.1', 'Presto', '2.2.0', 'J2ME', :mobile_browser],
       ['Opera/9.60 (J2ME/MIDP; Opera Mini/4.2.14320/554; U; cs) Presto/2.2.0', 'Opera Mini', '4.2.14320', '4.2', 'Presto', '2.2.0', 'J2ME', :mobile_browser],
       ['Opera/10.61 (J2ME/MIDP; Opera Mini/5.1.21219/19.999; en-US; rv:1.9.3a5) WebKit/534.5 Presto/2.6.30', 'Opera Mini', '5.1.21219', '5.1', 'Presto', '2.6.30', 'J2ME', :mobile_browser],
+      ['Opera/9.80 (iPad; Opera Mini/6.1.15738/25.692; U; de) Presto/2.5.25 Version/10.54', 'Opera Mini', '6.1.15738', '6.1', 'Presto', '2.5.25', 'iOS', :mobile_browser],
       
       # Opera Mobile
       ['Opera/9.80 (J2ME/MIDP; Opera Mini/9.80 (S60; SymbOS; Opera Mobi/23.348; U; en) Presto/2.5.25 Version/10.54', 'Opera Mobile', '9.80', '9.80', 'Presto', '2.5.25', 'Symbian OS', :mobile_browser],
