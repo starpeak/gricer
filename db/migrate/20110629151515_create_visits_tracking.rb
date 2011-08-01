@@ -101,7 +101,7 @@ class CreateVisitsTracking < ActiveRecord::Migration
       t.string   :referer_protocol
       t.string   :referer_host
       t.string   :referer_path
-      t.string   :referer_params
+      t.text     :referer_params
       
       t.string   :search_engine
       t.string   :search_query
