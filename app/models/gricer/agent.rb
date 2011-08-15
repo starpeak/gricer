@@ -1,5 +1,34 @@
-module Gricer
-  class Agent < ::ActiveRecord::Base
+module Gricer  
+  # ActiveRecord Model for User Agent Statistics
+  # @attr [String] request_header
+  #   The  current value of user agent string as within the HTTP request.
+  #
+  # @attr [String] name
+  #   The current value of user agent's name.
+  #   (e.g. 'Firefox', 'Chrome', 'Internet Explorer')
+  #
+  # @attr [String] full_version
+  #   The current value of user agent's full version.
+  #   This means it does include all sub version numbers.
+  #
+  # @attr [String] major_version
+  #   The current value of user agent's major version.
+  #   This means it does include only the first number after a dot.
+  #
+  # @attr [String] engine_name
+  #   The current value of the name of the engine used by the user agent
+  #
+  # @attr [String] engine_version
+  #   The current value of the version of the engine used by the user agent
+  #
+  # @attr [String] os
+  #   The current value of the OS the user agent is hosted on.
+  #
+  # @attr [String] agent_class
+  #   The current value of the classification of the user agent. 
+  #
+  #   See {AGENT_CLASSES} for possible values.
+  class Agent < ::ActiveRecord::Base    
     set_table_name "#{::Gricer::config.table_name_prefix}agents"
     include ActiveModel::Statistics
     
@@ -8,16 +37,20 @@ module Gricer
     
     before_create :guess_agent_type
     
+    # The agent class constant defines numeric values for the different agent types to be stored in a database.
     AGENT_CLASSES = {
       0x1000 => :browser,
       0x2000 => :mobile_browser,
       0x0001 => :bot
     }
     
+    # Filter out anything that is not a Browser or MobileBrowser
+    # @return [ActiveRecord::Relation]
     def self.browsers
       self.where("\"#{self.table_name}\".\"agent_class_id\" IN (?)", [0x1000, 0x2000])
     end
     
+
     def agent_class
       AGENT_CLASSES[agent_class_id]
     end
@@ -32,8 +65,8 @@ module Gricer
       end      
     end
     
-    def guess_agent_type
-      
+    # Guess the user agent data from the given request_header attribute and fill out the fields.
+    def guess_agent_type    
       return if request_header.blank?
       
       agent_string = request_header.gsub(/[UI];[ ]*/, '')

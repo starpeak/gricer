@@ -1,33 +1,63 @@
 module Gricer
+  # The configuration object for Gricer
+  #
+  # 
   class Config
-    attr_writer :table_name_prefix, :admin_prefix, :admin_layout # :nodoc:
-    attr_writer :geoip_db, :geoip_dat # :nodoc:
-    attr_writer :exclude_paths # :nodoc:
-    attr_writer :admin_menu #:nodoc:
+    attr_writer :table_name_prefix, :admin_prefix, :admin_layout 
+    attr_writer :max_session_duration
+    attr_writer :geoip_db, :geoip_dat 
+    attr_writer :exclude_paths 
+    attr_writer :admin_menu 
     
-    def initialize(&block) #:nodoc:
+    # A new instance of Gricer::Config.
+    #
+    # Configure options can be passed in a block.
+    #
+    # @see #configure
+    #
+    # @return [Gricer::Config] 
+    def initialize(&block)
       configure(&block) if block_given?
     end
 
     # Configure your Gricer Rails Engine with the given parameters in 
-    # the block. For possible options see above.
+    # the block. For possible options see Instance Attributes.
+    #
+    # @yield (config) The actual configuration instance
+    # @return [Gricer::Config] The actual configuration instance
     def configure(&block)
       yield(self)
     end
     
-    def table_name_prefix #:nodoc:
+    # The prefix for table names of gricer database tables.
+    #
+    # Default value is 'gricer_'
+    # @return [String] 
+    def table_name_prefix 
       @table_name_prefix ||= 'gricer_'
     end
     
-    def admin_prefix #:nodoc:
+    # Configure the prefix for admin pages paths
+    #
+    # Default value is 'gricer'    
+    # @return [String] 
+    def admin_prefix
       @admin_prefix.blank? ? 'gricer' : @admin_prefix
     end
     
-    def admin_layout #:nodoc:
+    # Configure to use another layout than the application default for Gricer controllers
+    #
+    # Default value is nil
+    # @return [String] 
+    def admin_layout 
       @admin_layout
     end
     
-    def admin_menu #:nodoc:
+    # Configure the structure of Gricer's admin menu
+    #
+    # Default value see source
+    # @return [Array] 
+    def admin_menu 
       @admin_menu ||= [
         ['Overview', :dashboard, {controller: 'gricer/dashboard', action: 'overview'}],
         ['Visitors', :menu, [
@@ -59,19 +89,35 @@ module Gricer
       ]
     end
     
-    def exclude_paths #:nodoc:
+    # Configure page urls matching this Expression to be excluded from being tracked in Gricer statistics
+    # Default is to exclude the admin pages
+    # @return [Regexp] 
+    def exclude_paths 
       @exclude_actions ||= /^#{admin_prefix}$/
     end
     
-    def geoip_dat #:nodoc:
+    # Configure the data file used by GeoIP
+    # If you configure #geoip_db this property will be ignored.
+    #
+    # Default is no data file given.
+    # @return [String] 
+    def geoip_dat 
       @geoip_dat
     end
     
-    def geoip_db #:nodoc:
+    # Configure the database instance used by GeoIP
+    #
+    # Default is none GeoIP database configured
+    # @return [GeoIP::City]
+    def geoip_db 
       @geoip_db ||= geoip_dat ? GeoIP::City.new(geoip_dat, :index, false) : nil
     end
     
-    def max_session_duration #:nodoc:
+    # Configure after which time of inactivity the Gricer::Session should expire
+    #
+    # Default is 15 minutes 
+    # @return [Integer] 
+    def max_session_duration 
       @max_session_duration ||= 15.minutes
     end
   

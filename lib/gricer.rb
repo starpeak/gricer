@@ -7,17 +7,28 @@ require 'gricer/action_controller/track'
 
 require 'gricer/active_model/statistics'
 
+# Gricer is a web analytics gem for Rails 3.1 and beyond
 module Gricer
   class << self    
-    # To access the actual configuration of your Gricer, you can call this.
+    # To access the actual configuration of your Gricer, you can call this function.
     #
     # An example would be <tt>Gricer.config.table_name_prefix = 'stats_'</tt>
     #
     # See Gricer::Config for configuration options.
+    #
+    # @return [Gricer::Config] The actual configuration instance of Gricer
+    # @see Gricer::Config
     def config
       @config ||= Config.new
     end
     
+    # To initialize Gricer it is handy to give it a block of options.
+    #
+    # See Gricer::Config for configuration options.
+    #
+    # @yield (config) The actual configuration instance of Gricer
+    # @return [Gricer::Config] The actual configuration instance of Gricer
+    # @see Gricer::Config
     def configure(&block)
       config.configure(&block)
     end

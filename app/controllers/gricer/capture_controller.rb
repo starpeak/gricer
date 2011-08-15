@@ -1,5 +1,9 @@
 module Gricer
-  class CaptureController < ::ApplicationController    
+  # This is the controller to capture additional values from the Javascript track tag.
+  #
+  # @see Gricer::TrackHelper#gricer_track_tag
+  class CaptureController < ::ApplicationController  
+    # This action stores the data submitted by the Javascript.
     def index
       gricer_request = Request.find_by_id(params[:id]) 
       gricer_session = Session.find_by_id(session[:gricer_session])   

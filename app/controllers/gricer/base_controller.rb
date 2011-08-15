@@ -1,10 +1,14 @@
 module Gricer
+  # This is the base controller which is used by Gricer's basic statistics controllers
+  #
+  # You can use this to make your own statistics controllers from a scaffold.
   class BaseController < ::ApplicationController    
     before_filter :guess_from_thru
     helper BaseHelper
     
     layout ::Gricer.config.admin_layout if ::Gricer.config.admin_layout
     
+    # This action generates a JSON for a process statistics.
     def process_stats
       @items = basic_collection
       
@@ -36,6 +40,7 @@ module Gricer
       render json: data
     end
     
+    # This action generates a JSON for a spread statistics.
     def spread_stats    
       @items = basic_collection.between_dates(@stat_from, @stat_thru)
       
@@ -68,10 +73,14 @@ module Gricer
     end
     
     private
+    # @abstract
+    # Define which is the basic collection to be processed by the controller.
+    # This value has to be overwritten to use the process_stats or spread_stats actions.
     def basic_collection
       raise 'basic_collection must be defined'
     end
     
+    # Define how to handle special fields
     def handle_special_fields
       if params[:filters]
         params[:filters].each do |filter_attr, filter_value|
@@ -80,10 +89,12 @@ module Gricer
       end
     end
     
+    # Define how to handle further details
     def further_details
       {}
     end
         
+    # Guess for which time range to display statistics
     def guess_from_thru
       begin
         @stat_thru = Time.parse(params[:thru]).to_date 

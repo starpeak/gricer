@@ -1,11 +1,14 @@
 module Gricer
+  # This controller handles the request based statistics
   class RequestsController < BaseController    
 
     private
+    # Set the basic collection to requests from browsers.
     def basic_collection
       Request.browsers
     end
     
+    # Handle special fields
     def handle_special_fields
       if ['referer_host', 'referer_path', 'referer_params', 'search_engine', 'search_query'].include?(params[:field])
         @items = @items.only_first_in_session
@@ -23,6 +26,7 @@ module Gricer
       super
     end
     
+    # Offer links to further details on some attributes
     def further_details 
       {
         'referer_host' => 'referer_path',

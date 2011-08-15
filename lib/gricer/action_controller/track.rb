@@ -1,5 +1,9 @@
 module Gricer
+  # Around-Filter for tracking requests in Gricer
   class TrackRequestFilter
+    # Around-Filter for tracking requests in Gricer
+    # @param controller The controller from which this Filter was included.
+    # @yield The controller's code block
     def self.filter(controller, &block)
       if controller.controller_path =~ /^gricer\// or controller.request.path =~ ::Gricer.config.exclude_paths
         Rails.logger.debug "Gricer Track Request: Do not track '#{controller.controller_path}##{controller.action_name}' by config"
@@ -53,7 +57,30 @@ module Gricer
     end
   end 
   
+  # Helper Method to include Javascript code to capture extra values like screen size
   module TrackHelper
+    # Include Gricer's Javascript code to track values like screen size. 
+    #
+    # You should include this at the end of your layout file. For pages matching the
+    # Gricer::Config.exclude_paths expression, nothing will be added to your page.
+    #
+    # @example For html.erb add at the end of your layout file:
+    #  <html>
+    #    <head>[...]</head>
+    #    <body>
+    #       [...]
+    #       <%= gricer_track_tag %>
+    #     </body>
+    #   </html>
+    #
+    # @example For html.haml add at the end of your layout file:
+    #  %html
+    #    %head
+    #      [...]
+    #    %body
+    #      [...]
+    #      = gricer_track_tag 
+    
     def gricer_track_tag
       if gricer_request and defined?(gricer_capture_path)
         content_tag :script, "jQuery(function($) {$.post('#{gricer_capture_path(gricer_request.id)}', Gricer.prepareValues());});", type: 'text/javascript'
@@ -62,16 +89,35 @@ module Gricer
   end
   
   module ActionController
+    # Gricer's Tracker module for ActionController
+    #
+    # To include the Tracker module into ActionController add
+    # gricer_track_requests to your ApplicationController or
+    # to any Controller you want to track with Gricer.
+    #
+    # @example 
+    #   class ApplicationController < ActionController::Base
+    #     protect_from_forgery
+    #     gricer_track_requests
+    #     [...]
+    #   end
+    
     module Tracker
+      # Include the helper functions and around_filter into controllers.
       def self.included(base)
         base.append_around_filter TrackRequestFilter
         base.helper TrackHelper
         base.helper_method :gricer_request
       end
       
+      # Set the actual gricer request instance.
+      # @param gricer_request [Gricer::Request] The gricer request to be set as actual request instance.
       def gricer_request=(gricer_request)
         @gricer_request = gricer_request
       end
+      
+      # Get the actual gricer request instance.
+      # @return [Gricer::Request]
       def gricer_request
         @gricer_request
       end

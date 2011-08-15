@@ -66,7 +66,7 @@ Web Analytics Tool for Rails 3.1
 == API Documentation
 
 * API Documentation can be created by running 
-    rake rdoc
+    rake doc:yard
   from the Gricer project directory.
 * There is an auto-generated, up-to-the-hour online_documentation[http://gricer.org/api] of the API Documentation.
     

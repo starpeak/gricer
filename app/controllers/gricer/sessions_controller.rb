@@ -1,10 +1,13 @@
 module Gricer
+  # This controller handles the session based statistics
   class SessionsController < BaseController
     private
+    # Set the basic collection to sessions from browsers.
     def basic_collection
       Session.browsers
     end
     
+    # Offer links to further details on some attributes
     def further_details 
       {
         'agent.name' => 'agent.major_version',
