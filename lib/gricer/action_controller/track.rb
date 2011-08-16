@@ -125,7 +125,10 @@ module Gricer
   end
 end
 
+# Gricer's extensions to ActionController::Base
 class ActionController::Base
+  # Add this to your controllers to track requests for it.
+  # param options [Hash] Options that may be added in future.
   def self.gricer_track_requests(options = {})
     include Gricer::ActionController::Tracker
   end

@@ -422,6 +422,7 @@ module Gricer
     # Get the new visitor rate
     #
     # This is the rate of new sessions to all sessions
+    # return [Float]
     def self.new_visitors
       if (c = self.count) > 0
         self.new_visits.count / c.to_f
