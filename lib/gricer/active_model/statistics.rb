@@ -94,7 +94,7 @@ module Gricer
         def filter_by(attribute, value)
           return self if attribute.blank?
           
-          Rails.logger.debug "Attr: #{attribute}, Value: #{value}"
+          #Rails.logger.debug "Attr: #{attribute}, Value: #{value}"
           
           parts = attribute.to_s.split('.')
           if parts[1].blank?

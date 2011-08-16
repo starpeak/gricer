@@ -26,9 +26,9 @@ module Gricer
         options[:user_id] = controller.gricer_user_id
       end
       
-      options.keys.each do |key|
-        Rails.logger.debug key
-      end
+      # options.keys.each do |key|
+      #         Rails.logger.debug key
+      #       end
       
       gricer_request = ::Gricer::Request.create options
       controller.gricer_request = gricer_request
@@ -39,7 +39,7 @@ module Gricer
         
         gricer_request.update_attributes(
           status_code: controller.response.status,
-          content_type: controller.response.content_type,
+          content_type: controller.response.content_type.to_s,
           body_size: controller.response.body.size,
           system_time: (benchmark.cstime*1000).to_i,
           user_time: (benchmark.cutime*1000).to_i,
@@ -49,7 +49,7 @@ module Gricer
       rescue 
         gricer_request.update_attributes(
           status_code: 500,
-          content_type: controller.response.content_type,
+          content_type: controller.response.content_type.to_s,
           body_size: controller.response.body.size
         )
         raise

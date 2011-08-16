@@ -310,7 +310,7 @@ module Gricer
       require 'digest/sha1'
       require 'resolv'
     
-      logger.debug("IP: #{ip}")
+      #logger.debug("IP: #{ip}")
     
       unless ip.blank?
         self.ip_address_hash = Digest::SHA1.hexdigest(ip)
@@ -402,7 +402,7 @@ module Gricer
     # @return [Float]
     def self.avg_duration
       if (c = self.count) > 0
-        logger.debug ActiveRecord::Base.connection.class
+        #logger.debug ActiveRecord::Base.connection.class
         
         if ActiveRecord::Base.connection.class.to_s == 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
           self.sum("date_part('epoch', \"#{self.table_name}\".\"updated_at\") - date_part('epoch', \"#{self.table_name}\".\"created_at\")").to_f / c.to_f    

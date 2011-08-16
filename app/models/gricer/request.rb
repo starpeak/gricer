@@ -152,7 +152,7 @@ module Gricer
       
       @request_locale   = request.headers['HTTP_ACCEPT_LANGUAGE'].try(:split, ',').try(:first)
       
-      logger.debug I18n.locale
+      #logger.debug I18n.locale
     end
     
     def locale=(locale)
