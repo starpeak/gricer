@@ -9,5 +9,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-script'
   s.add_dependency 'sass-rails'
   s.add_dependency 'pjax-rails'
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 end
