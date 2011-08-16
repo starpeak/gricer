@@ -93,7 +93,7 @@ module Gricer
     # Default is to exclude the admin pages
     # @return [Regexp] 
     def exclude_paths 
-      @exclude_actions ||= /^#{admin_prefix}$/
+      @exclude_paths ||= /^#{admin_prefix}$/
     end
     
     # Configure the data file used by GeoIP
