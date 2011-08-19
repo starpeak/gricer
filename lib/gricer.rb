@@ -1,6 +1,4 @@
-require "gricer/config"
 require "gricer/engine"
-require "gricer/localization"
 
 require 'gricer/action_controller/base'
 require 'gricer/action_controller/track'
@@ -9,6 +7,8 @@ require 'gricer/active_model/statistics'
 
 # Gricer is a web analytics gem for Rails 3.1 and beyond
 module Gricer
+  autoload :Config, 'gricer/config'
+  
   class << self    
     # To access the actual configuration of your Gricer, you can call this function.
     #
@@ -34,3 +34,7 @@ module Gricer
     end
   end
 end
+
+require 'i18n'
+I18n.load_path += Dir.glob("#{File.dirname(__FILE__)}/../../config/locales/*.yml")
+I18n.backend.reload!
