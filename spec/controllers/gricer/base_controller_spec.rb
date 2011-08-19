@@ -50,6 +50,8 @@ describe Gricer::BaseController do
         data: {some: :values}
       })
       
+      collection.should_receive(:filter_by).with('filter', 'some_value') { collection }
+      
       controller.send(:process_stats)
     end
     
@@ -74,9 +76,7 @@ describe Gricer::BaseController do
   end
   
   context 'spread_stats' do
-    let(:collection) { mock_model('MyStatClass') }
-    let(:items) { {some: :values} }
-    
+    let(:collection) { mock_model('MyStatClass') }    
     before do
       controller.params = {
         field: 'my_field',
@@ -89,9 +89,9 @@ describe Gricer::BaseController do
  
       controller.stub(:url_for).with(action: "process_stats", field: 'my_field', filters: nil, only_path: true) { 'my_alt_url' }
             
-      collection.stub(:between_dates) { items }
-      items.stub(:count).with(:id) { 42 }
-      items.stub(:count_by).with('my_field') { [['Item 1', 23], ['Item 2', 19]]}
+      collection.stub(:between_dates) { collection }
+      collection.stub(:count).with(:id) { 42 }
+      collection.stub(:count_by).with('my_field') { [['Item 1', 23], ['Item 2', 19]]}
     end
     
     it 'should render ajax' do
@@ -124,6 +124,8 @@ describe Gricer::BaseController do
         total: 42, 
         data: [["Item 1", 23], ["Item 2", 19]]
       })
+      
+      collection.should_receive(:filter_by).with('filter', 'some_value') { collection }
       
       controller.send(:spread_stats)
     end

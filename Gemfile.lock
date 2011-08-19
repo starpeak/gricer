@@ -51,6 +51,9 @@ GEM
     childprocess (0.2.1)
       ffi (~> 1.0.6)
     chronic (0.6.2)
+    coffee-rails (3.1.0.rc.6)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.1.0.rc1)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -181,6 +184,9 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.29)
+    uglifier (1.0.1)
+      execjs (>= 0.3.0)
+      multi_json (>= 1.0.2)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -195,7 +201,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   chronic
-  coffee-script
+  coffee-rails (~> 3.1.0.rc)
   cucumber
   cucumber-rails
   database_cleaner
@@ -206,14 +212,15 @@ DEPENDENCIES
   jquery-rails
   launchy
   pjax-rails
-  rails (= 3.1.0.rc5)
+  rails (~> 3.1.0.rc)
   rcov
   rspec
   rspec-rails
   ruby-debug19
-  sass-rails
+  sass-rails (~> 3.1.0.rc)
   spork!
   sqlite3
   syntax
+  uglifier
   webrat
   yard
