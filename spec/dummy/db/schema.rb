@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110629151515) do
+ActiveRecord::Schema.define(:version => 20110819130712) do
 
   create_table "agents", :force => true do |t|
     t.integer "requests_count"
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(:version => 20110629151515) do
     t.integer  "window_height"
     t.string   "referer_protocol"
     t.string   "referer_host"
-    t.string   "referer_path"
-    t.string   "referer_params"
+    t.text     "referer_path"
+    t.text     "referer_params"
     t.string   "search_engine"
     t.string   "search_query"
     t.boolean  "is_first_in_session"
@@ -174,8 +174,8 @@ ActiveRecord::Schema.define(:version => 20110629151515) do
     t.integer  "window_height"
     t.string   "referer_protocol"
     t.string   "referer_host"
-    t.string   "referer_path"
-    t.string   "referer_params"
+    t.text     "referer_path"
+    t.text     "referer_params"
     t.string   "search_engine"
     t.string   "search_query"
     t.boolean  "is_first_in_session"
