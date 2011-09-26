@@ -6,7 +6,7 @@ module Gricer
     before_filter :guess_from_thru
     helper BaseHelper
     
-    layout ::Gricer.config.admin_layout if ::Gricer.config.admin_layout
+    layout ::Gricer.config.admin_layout unless ::Gricer.config.admin_layout.nil?
     
     # This action generates a JSON for a process statistics.
     def process_stats
