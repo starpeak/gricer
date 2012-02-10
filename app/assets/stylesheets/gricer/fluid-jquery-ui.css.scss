@@ -10,7 +10,7 @@
  * http://docs.jquery.com/UI/Theming/API
  */
 
-@import 'helpers/css3';
+@import 'compass/css3';
 
 $jquery-ui-widget-border-color: #333;
 $jquery-ui-widget-background-color: #ddd;
@@ -153,7 +153,7 @@ $jquery-ui-widget-error-text-color: #383838;
 .ui-widget-content { 
   border: 1px solid $jquery-ui-widget-border-color;
   background: $jquery-ui-widget-background-color;
-  @include gradient(lighten($jquery-ui-widget-background-color, 20%), darken($jquery-ui-widget-background-color, 20%));
+  @include background-image(linear-gradient(lighten($jquery-ui-widget-background-color, 20%), darken($jquery-ui-widget-background-color, 20%)));
   color: $jquery-ui-widget-text-color;
 }
   
@@ -164,7 +164,7 @@ $jquery-ui-widget-error-text-color: #383838;
 .ui-widget-header { 
   border: 1px solid $jquery-ui-widget-header-border-color;
   background: $jquery-ui-widget-header-background-color;
-  @include gradient(lighten($jquery-ui-widget-header-background-color, 20%), darken($jquery-ui-widget-header-background-color, 20%));
+  @include background-image(linear-gradient(lighten($jquery-ui-widget-header-background-color, 20%), darken($jquery-ui-widget-header-background-color, 20%)));
   color: $jquery-ui-widget-header-text-color;
   font-weight: bold;
 }
@@ -179,7 +179,7 @@ $jquery-ui-widget-error-text-color: #383838;
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
   border: 1px solid $jquery-ui-widget-default-border-color;
   background: $jquery-ui-widget-default-background-color;
-  @include gradient(lighten($jquery-ui-widget-default-background-color, 20%), darken($jquery-ui-widget-default-background-color, 20%));
+  @include background-image(linear-gradient(lighten($jquery-ui-widget-default-background-color, 20%), darken($jquery-ui-widget-default-background-color, 20%)));
   font-weight: bold;
   color: $jquery-ui-widget-default-text-color;
 }
@@ -192,7 +192,7 @@ $jquery-ui-widget-error-text-color: #383838;
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { 
   border: 1px solid $jquery-ui-widget-hover-border-color;
   background: $jquery-ui-widget-hover-background-color;
-  @include gradient(lighten($jquery-ui-widget-hover-background-color, 20%), darken($jquery-ui-widget-hover-background-color, 20%));
+  @include background-image(linear-gradient(lighten($jquery-ui-widget-hover-background-color, 20%), darken($jquery-ui-widget-hover-background-color, 20%)));
   font-weight: bold;
   color: $jquery-ui-widget-hover-text-color;
 }
@@ -205,7 +205,7 @@ $jquery-ui-widget-error-text-color: #383838;
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { 
   border: 1px solid $jquery-ui-widget-active-border-color;
   background: $jquery-ui-widget-active-background-color;
-  @include gradient(lighten($jquery-ui-widget-active-background-color, 20%), darken($jquery-ui-widget-active-background-color, 20%));
+  @include background-image(linear-gradient(lighten($jquery-ui-widget-active-background-color, 20%), darken($jquery-ui-widget-active-background-color, 20%)));
   font-weight: bold;
   color: $jquery-ui-widget-active-text-color;
 }
@@ -225,7 +225,7 @@ $jquery-ui-widget-error-text-color: #383838;
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
   border: 1px solid $jquery-ui-widget-highlight-border-color;
   background: $jquery-ui-widget-highlight-background-color;
-  @include gradient(lighten($jquery-ui-widget-highlight-background-color, 20%), darken($jquery-ui-widget-highlight-background-color, 20%));
+  @include background-image(linear-gradient(lighten($jquery-ui-widget-highlight-background-color, 20%), darken($jquery-ui-widget-highlight-background-color, 20%)));
   color: $jquery-ui-widget-highlight-text-color;
 }
   
@@ -236,7 +236,7 @@ $jquery-ui-widget-error-text-color: #383838;
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
   border: 1px solid $jquery-ui-widget-error-border-color;
   background: $jquery-ui-widget-error-background-color;
-  @include gradient(lighten($jquery-ui-widget-error-background-color, 20%), darken($jquery-ui-widget-error-background-color, 20%));
+  @include background-image(linear-gradient(lighten($jquery-ui-widget-error-background-color, 20%), darken($jquery-ui-widget-error-background-color, 20%)));
   color: $jquery-ui-widget-error-text-color;
 }
   

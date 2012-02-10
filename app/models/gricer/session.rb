@@ -97,7 +97,7 @@ module Gricer
   #   The current value of the locale requested 
   #
   class Session < ::ActiveRecord::Base
-    set_table_name "#{::Gricer::config.table_name_prefix}sessions"
+    self.table_name = "#{::Gricer::config.table_name_prefix}sessions"
     include ActiveModel::Statistics
     
     has_many :requests, class_name: 'Gricer::Request', foreign_key: :session_id, order: 'created_at ASC'

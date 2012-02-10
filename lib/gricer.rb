@@ -5,6 +5,9 @@ require 'gricer/action_controller/track'
 
 require 'gricer/active_model/statistics'
 
+require 'sass'
+require 'compass'
+
 # Gricer is a web analytics gem for Rails 3.1 and beyond
 module Gricer
   autoload :Config, 'gricer/config'

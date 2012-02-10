@@ -29,7 +29,7 @@ module Gricer
   #
   #   See {AGENT_CLASSES} for possible values.
   class Agent < ::ActiveRecord::Base    
-    set_table_name "#{::Gricer::config.table_name_prefix}agents"
+    self.table_name = "#{::Gricer::config.table_name_prefix}agents"
     include ActiveModel::Statistics
     
     has_many :requests, class_name: 'Gricer::Request', foreign_key: :agent_id, order: 'created_at ASC'

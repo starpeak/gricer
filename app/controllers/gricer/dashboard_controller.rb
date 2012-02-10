@@ -12,7 +12,7 @@ module Gricer
       @sessions = Session.browsers.between_dates(@stat_from, @stat_thru)
       @requests = Request.browsers.between_dates(@stat_from, @stat_thru)
       
-      render partial: 'overview.html', locals: {sessions: @sessions, requests: @requests}
+      render partial: 'overview', formats: [:html], locals: {sessions: @sessions, requests: @requests}
     end
   end
 end

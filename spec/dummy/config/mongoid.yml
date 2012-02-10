@@ -1,0 +1,7 @@
+development:
+  host: localhost
+  database: gricer_development
+
+test:
+  host: localhost
+  database: gricer_test

@@ -103,7 +103,7 @@ module Gricer
   #   The current value of the locale responded 
   #
   class Request < ::ActiveRecord::Base
-    set_table_name "#{::Gricer::config.table_name_prefix}requests"
+    self.table_name = "#{::Gricer::config.table_name_prefix}requests"
     include ActiveModel::Statistics
     
     belongs_to :session, class_name: 'Gricer::Session', counter_cache: true
@@ -150,7 +150,7 @@ module Gricer
       self.protocol     = request.protocol.sub(/[:\/]*$/, '').upcase
       self.locale       = I18n.locale
       
-      @request_locale   = request.headers['HTTP_ACCEPT_LANGUAGE'].try(:split, ',').try(:first)
+      @request_locale   = request.headers['HTTP_ACCEPT_LANGUAGE'].try(:scan, /[^,;]+/).try(:first)
       
       #logger.debug I18n.locale
     end
