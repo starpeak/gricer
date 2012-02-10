@@ -9,10 +9,13 @@ require 'sass'
 require 'compass/rails'
 require 'jquery/rails'
 
+require 'gricer/config'
+require 'gricer/parsers/agent'
+require 'gricer/parsers/ip'
+
+
 # Gricer is a web analytics gem for Rails 3.1 and beyond
-module Gricer
-  autoload :Config, 'gricer/config'
-  
+module Gricer  
   class << self    
     # To access the actual configuration of your Gricer, you can call this function.
     #
