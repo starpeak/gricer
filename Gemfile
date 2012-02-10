@@ -2,23 +2,28 @@ source "http://rubygems.org"
 
 gemspec
 
-gem "rails",              '~>3.2.1'
+if true
+  gem "rails",              '~>3.2.1'
+else
+  gem "rails",              '~>3.1.3'
+
+  # Gems used only for assets and not required
+  # in production environments by default.
+  group :assets do
+   gem 'sass-rails',       '~> 3.1'
+   gem 'compass-rails'
+   gem 'coffee-rails',     '~> 3.1'
+   gem 'uglifier'
+ end
+ 
+ gem 'jquery-rails'
+end
+
 # SQLite for ActiveRecord flavoured models
 gem 'sqlite3'
 # Mongoid for Mongoid flavoured models
 gem "mongoid", ">= 2.4"
 gem "bson_ext", ">= 1.5"
-
-# Gems used only for assets and not required
-# in production environments by default.
-# group :assets do
-#   gem 'sass-rails',       '~> 3.2.3'
-#   gem 'compass-rails'
-#   gem 'coffee-rails',     '~> 3.2.1'
-#   gem 'uglifier',         '>= 1.0.3'
-# end
-
-# gem 'jquery-rails'
 
 group :test do
   gem 'rspec-rails', '>= 2.8.1'
