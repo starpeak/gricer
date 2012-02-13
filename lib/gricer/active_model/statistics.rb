@@ -38,19 +38,28 @@ module Gricer
       # @example For getting the name of the attribute name of Agent associated to the Request:
       #   Gricer::Request.human_attributes('agent.name')
       module ClassMethods
+        # Find out which model type is used in this class
+        def is_active_record?
+          self.superclass == ::ActiveRecord::Base
+        end
+        
+        
         # Filter records for the time between from and thru
         # @param from [Date, Time] Only get records on or after this point of time
         # @param thru [Date, Time] Only get records before this point of time
-        # @return [ActiveRecord::Relation]      
+        # @return [ActiveRecord::Relation/Mongoid::Criteria]      
         def between(from, thru)
-          #self.where(self.table_name => {:created_at.gte => from, :created_at.lt => thru})
-          self.where("\"#{table_name}\".\"created_at\" >= ? AND \"#{table_name}\".\"created_at\" < ?", from, thru)
+          if self.is_active_record?
+            self.where("\"#{table_name}\".\"created_at\" >= ? AND \"#{table_name}\".\"created_at\" < ?", from, thru)
+          else
+            self.where(:created_at.gte => from, :created_at.lt => thru)
+          end
         end
         
         # Filter records for the dates between from and thru
         # @param from [Date] Only get records on or after this date
         # @param thru [Date] Only get records on or before this date
-        # @return [ActiveRecord::Relation]        
+        # @return [ActiveRecord::Relation/Mongoid::Criteria]        
         def between_dates(from, thru)
           self.between(from.to_date.to_time, thru.to_date.to_time+1.day)
         end
@@ -61,26 +70,59 @@ module Gricer
         # @return [ActiveRecord::Relation] 
         def grouped_by(attribute)
           parts = attribute.to_s.split('.')
-          if parts[1].blank?
-            self.group(attribute)
-            .select(attribute)
-          else
-            if association = self.reflect_on_association(parts[0].to_sym)          
-              self.includes(association.name)
-              .group("\"#{association.table_name}\".\"#{parts[1]}\"")
-              .select("\"#{association.table_name}\".\"#{parts[1]}\"")
+          
+          if self.is_active_record?
+            if parts[1].blank?
+              self.group(attribute)
+              .select(attribute)
             else
-              raise "Association '#{parts[0]}' not found on #{self.name}"
+              if association = self.reflect_on_association(parts[0].to_sym)          
+                self.includes(association.name)
+                .group("\"#{association.table_name}\".\"#{parts[1]}\"")
+                .select("\"#{association.table_name}\".\"#{parts[1]}\"")
+              else
+                raise "Association '#{parts[0]}' not found on #{self.name}"
+              end
             end
+          else 
+            
+            scoped
+            
           end
         end
 
         # Count records by attribute.
         # 
         # @param attribute [String, Symbol] Attribute name to count for. You can use gricers extended attribute names.
-        # @return [ActiveRecord::Relation] 
+        # @return [ActiveRecord::Relation/Mongoid::Criteria] 
         def count_by(attribute)
-          self.grouped_by(attribute).count(:id).sort{ |a,b| b[1] <=> a[1] }
+          if self.is_active_record?
+            self.grouped_by(attribute).count(:id).sort{ |a,b| b[1] <=> a[1] }
+          else
+            results = {}
+            
+            parts = attribute.to_s.split('.')
+            
+            if parts[1].blank?
+              scoped.each do |item|
+                value = item.send(attribute)
+                results[value] ||= 0
+                results[value] += 1
+              end
+            else
+              if association = self.reflect_on_association(parts[0].to_sym)          
+                scoped.each do |item|
+                  value = item.send(association.name).send(parts[1])
+                  results[value] ||= 0
+                  results[value] += 1
+                end
+              else
+                raise "Association '#{parts[0]}' not found on #{self.name}"
+              end
+            end
+            
+            results.map{ |a,b| [a,b] }.sort{ |a,b| b[1] <=> a[1] }
+          end
         end
       
         # Filter records by attribute's value.
@@ -89,7 +131,7 @@ module Gricer
         #   some_relation.filter('agent.name', 'Internet Explorer').filter('agent.os', 'Windows')
         # @param attribute [String, Symbol] Attribute name to filter. You can use gricers extended attribute names. 
         # @param value Attribute value to filter.
-        # @return [ActiveRecord::Relation] 
+        # @return [ActiveRecord::Relation/Mongoid::Criteria] 
 
         def filter_by(attribute, value)
           return self if attribute.blank?

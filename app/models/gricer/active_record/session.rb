@@ -99,80 +99,27 @@ module Gricer
     #
     class Session < ::ActiveRecord::Base
       self.table_name = "#{::Gricer::config.table_name_prefix}sessions"
+      include ActiveModel::Session
       include ActiveModel::Statistics
     
       has_many :requests, class_name: 'Gricer::ActiveRecord::Request', foreign_key: :session_id, order: 'created_at ASC'
       belongs_to :agent, class_name: 'Gricer::ActiveRecord::Agent', foreign_key: :agent_id, counter_cache: true
       belongs_to :previous_session, class_name: 'Gricer::ActiveRecord::Session', foreign_key: :previous_session_id
     
+      # Filter out only new visits (which does not have a previous_session)
+      # @return [ActiveRecord::Relation]
+      def self.new_visits
+        where("\"#{self.table_name}\".\"previous_session_id\" IS NULL")
+      end
+      
       # Filter out anything that is not a Browser or MobileBrowser
       # @return [ActiveRecord::Relation]
       def self.browsers
         self.includes("agent")
         .where("\"#{Agent.table_name}\".\"agent_class_id\" IN (?)", [0x1000, 0x2000])
       end
-    
-      # Filter out only bounce sessions (sessions with just one request)
-      # @return [ActiveRecord::Relation]
-      def self.bounce_sessions
-        self.where("\"#{self.table_name}\".\"requests_count\" = ?", 1)
-      end
-    
-      # Filter out only new visits (which does not have a previous_session)
-      # @return [ActiveRecord::Relation]
-      def self.new_visits
-        where("\"#{self.table_name}\".\"previous_session_id\" IS NULL")
-      end
-    
-      def ip_address=(ip)
-        self.attributes = Gricer::Parsers::Ip.get_info(ip)
-      end
-    
-      def requested_locale=(locale)
-        self.requested_locale_major, self.requested_locale_minor = locale.try(:downcase).try(:split, '-')
-      end
-    
-      def requested_locale
-        if requested_locale_minor
-          "#{requested_locale_major}-#{requested_locale_minor}"
-        else
-          requested_locale_major
-        end
-      end
-    
-      def silverlight_version=(version)
-        self[:silverlight_version] = version
-        self.silverlight_major_version = silverlight_version.match(/^([0-9]*\.[0-9]*)/).to_a.last if silverlight_version
-      end
-    
-      def flash_version=(version)
-        self[:flash_version] = version
-        self.flash_major_version = flash_version.match(/^([0-9]*\.[0-9]*)/).to_a.last if flash_version
-      end
-    
-      # Get the bounce rate 
-      #
-      # This is the rate of sessions with one request to sessions with multiple requests.
-      # @return [Float]
-      def self.bounce_rate
-        if (c = self.count) > 0
-          self.bounce_sessions.count / c.to_f
-        else
-          0
-        end
-      end
-    
-      # Get the average count of requests per session.
-      #
-      # @return [Float]
-      def self.requests_per_session
-        if (c = self.count) > 0
-          self.sum(:requests_count) / c.to_f
-        else
-          0
-        end
-      end
-    
+      
+        
       # Get the average duration of sessions in seconds.
       #
       # @return [Float]
@@ -190,22 +137,6 @@ module Gricer
         end
       end
     
-      # Get the duration of the current session instance
-      def duration
-        updated_at - created_at
-      end
-    
-      # Get the new visitor rate
-      #
-      # This is the rate of new sessions to all sessions
-      # return [Float]
-      def self.new_visitors
-        if (c = self.count) > 0
-          self.new_visits.count / c.to_f
-        else
-          0
-        end
-      end
     end
   end
 end

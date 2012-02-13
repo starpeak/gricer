@@ -4,6 +4,11 @@ require 'gricer/action_controller/base'
 require 'gricer/action_controller/track'
 
 require 'gricer/active_model/statistics'
+require 'gricer/active_model/session'
+require 'gricer/active_model/request'
+
+require 'gricer/mongoid/touch'
+require 'gricer/mongoid/counter_cache'
 
 require 'sass'
 require 'compass/rails'
@@ -12,6 +17,7 @@ require 'jquery/rails'
 require 'gricer/config'
 require 'gricer/parsers/agent'
 require 'gricer/parsers/ip'
+require 'gricer/parsers/request'
 
 
 # Gricer is a web analytics gem for Rails 3.1 and beyond
