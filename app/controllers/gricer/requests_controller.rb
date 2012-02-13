@@ -5,7 +5,7 @@ module Gricer
     private
     # Set the basic collection to requests from browsers.
     def basic_collection
-      Request.browsers
+      ::Gricer.config.request_model.browsers
     end
     
     # Handle special fields

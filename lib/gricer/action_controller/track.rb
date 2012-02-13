@@ -30,7 +30,7 @@ module Gricer
       #         Rails.logger.debug key
       #       end
       
-      gricer_request = ::Gricer::Request.create options
+      gricer_request = ::Gricer.config.request_model.create options
       controller.gricer_request = gricer_request
       controller.session[:gricer_session] = gricer_request.session_id
         

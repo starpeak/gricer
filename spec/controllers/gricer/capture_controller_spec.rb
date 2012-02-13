@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Gricer::CaptureController do
   context 'index' do
     it 'should handle proper request' do
-      gricer_session = mock_model(Gricer::Session)
-      gricer_request = mock_model(Gricer::Request, session: gricer_session)
+      gricer_session = mock_model(Gricer::ActiveRecord::Session)
+      gricer_request = mock_model(Gricer::ActiveRecord::Request, session: gricer_session)
       controller.stub(:session) { { gricer_session: 42 } }
-      Gricer::Session.should_receive(:find_by_id).with(42) { gricer_session }
-      Gricer::Request.should_receive(:find_by_id).with('23') { gricer_request }
+      Gricer::ActiveRecord::Session.should_receive(:find_by_id).with(42) { gricer_session }
+      Gricer::ActiveRecord::Request.should_receive(:find_by_id).with('23') { gricer_request }
       
       gricer_session.should_receive(:javascript=).with(true)
       gricer_session.should_receive(:java=).with('true')

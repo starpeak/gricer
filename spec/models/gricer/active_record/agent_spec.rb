@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gricer::Agent do
+describe Gricer::ActiveRecord::Agent do
   it 'should get Agent info from parser' do
     Gricer::Parsers::Agent.should_receive(:get_info).with('My new TopBrowser/42.23 with TopEngine/123.45 on a TopOS') do 
       {

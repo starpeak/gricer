@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gricer::Session do
+describe Gricer::ActiveRecord::Session do
 
   context 'IP' do    
     it 'should get IP info from parser' do

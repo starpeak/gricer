@@ -19,7 +19,7 @@ describe Gricer::RequestsController do
   
   context 'basic_collection' do
     it 'should define basic collection' do
-      Gricer::Request.should_receive(:browsers) { 'collection' }    
+      Gricer::ActiveRecord::Request.should_receive(:browsers) { 'collection' }    
       collection = controller.send(:basic_collection)
       collection.should == 'collection'    end
   end

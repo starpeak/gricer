@@ -8,6 +8,7 @@ module Gricer
     attr_writer :geoip_db, :geoip_dat 
     attr_writer :exclude_paths 
     attr_writer :admin_menu 
+    attr_writer :model_type
     
     # A new instance of Gricer::Config.
     #
@@ -121,5 +122,26 @@ module Gricer
       @max_session_duration ||= 15.minutes
     end
   
+    # Configure which type of models should be used in Gricer
+    #
+    # Set to :ActiveRecord or :Mongoid
+    #
+    # Default is :ActiveRecord
+    # @return [Symbol]
+    def model_type
+      @model_type ||= :ActiveRecord
+    end
+    
+    def session_model
+      "Gricer::#{model_type}::Session".constantize
+    end
+  
+    def request_model
+      "Gricer::#{model_type}::Request".constantize
+    end  
+    
+    def agent_model
+      "Gricer::#{model_type}::Agent".constantize
+    end
   end
 end

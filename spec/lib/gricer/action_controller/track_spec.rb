@@ -39,7 +39,7 @@ describe Gricer::TrackRequestFilter do
       
       my_command = mock 'MyCommand'
       my_command.should_receive(:test)
-      Gricer::Request.should_not_receive(:create)
+      Gricer::ActiveRecord::Request.should_not_receive(:create)
       
       Gricer::TrackRequestFilter.filter controller do
         my_command.test
@@ -53,7 +53,7 @@ describe Gricer::TrackRequestFilter do
       
       my_command = mock 'MyCommand'
       my_command.should_receive(:test)
-      Gricer::Request.should_not_receive(:create)
+      Gricer::ActiveRecord::Request.should_not_receive(:create)
       
       Gricer::TrackRequestFilter.filter controller do
         my_command.test

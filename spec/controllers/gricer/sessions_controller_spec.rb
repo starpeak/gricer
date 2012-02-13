@@ -19,7 +19,7 @@ describe Gricer::SessionsController do
   
   context 'basic_collection' do
     it 'should define basic collection' do
-      Gricer::Session.should_receive(:browsers) { 'collection' }    
+      Gricer::ActiveRecord::Session.should_receive(:browsers) { 'collection' }    
       collection = controller.send(:basic_collection)
       collection.should == 'collection'
     end

@@ -4,7 +4,7 @@ module Gricer
     private
     # Set the basic collection to sessions from browsers.
     def basic_collection
-      Session.browsers
+      ::Gricer.config.session_model.browsers
     end
     
     # Offer links to further details on some attributes

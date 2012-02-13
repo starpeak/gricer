@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gricer::Request do
+describe Gricer::ActiveRecord::Request do
   context 'set ip_address' do
     it 'should set an ip address' do
       subject.ip_address = '127.0.0.1'
@@ -70,7 +70,7 @@ describe Gricer::Request do
     it 'should accept long referer paths' do
       subject.referer = 'http://my.domain/this/is/a/very/long/path/to/the/page/i/was/referenced/by/and/that/got/tracked/by/gricer/and/should/be/stored/in/a/database/field/to/short/for/storing/the/given/value/as/string/has/only/256/characters/that_should_just_work_fine_and_should_not_create_an_error.html'
       # Emulate SQL db that truncates to long input like MySQL
-      if limit = Gricer::Request.columns_hash['referer_path'].limit
+      if limit = Gricer::ActiveRecord::Request.columns_hash['referer_path'].limit
         subject.referer_path = subject.referer_path[0, limit]
       end
       limit.should be_nil

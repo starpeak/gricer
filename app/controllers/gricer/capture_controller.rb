@@ -5,8 +5,8 @@ module Gricer
   class CaptureController < ::ApplicationController  
     # This action stores the data submitted by the Javascript.
     def index
-      gricer_request = Request.find_by_id(params[:id]) 
-      gricer_session = Session.find_by_id(session[:gricer_session])   
+      gricer_request = ::Gricer.config.request_model.find_by_id(params[:id]) 
+      gricer_session = ::Gricer.config.session_model.find_by_id(session[:gricer_session])   
       
       if gricer_session
         gricer_session.javascript          = true
