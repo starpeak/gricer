@@ -41,8 +41,15 @@ module Gricer
         # Find out which model type is used in this class
         def is_active_record?
           self.superclass == ::ActiveRecord::Base
-        end
+        end        
         
+        def model_type
+          if is_active_record?
+            :ActiveRecord
+          else
+            :Mongoid
+          end
+        end
         
         # Filter records for the time between from and thru
         # @param from [Date, Time] Only get records on or after this point of time
@@ -89,7 +96,7 @@ module Gricer
             scoped
             
           end
-        end
+        end        
 
         # Count records by attribute.
         # 
@@ -150,6 +157,14 @@ module Gricer
             end
           end
         end
+        
+        def without_nil_in(attribute, options = {})
+          if model_type == :Mongoid
+            excludes(attribute => nil)
+          else
+            where("#{attribute} IS NOT NULL")
+          end
+        end
       
         # Extends ActiveModel::Translation#human_attribute_name to use Gricer's extended attribute names.
         #
@@ -204,6 +219,12 @@ module Gricer
           return stats
         end
       end
+      
+      def model_type
+        self.class.model_type
+      end
+      
+      
     end
   end
 end

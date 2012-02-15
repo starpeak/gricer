@@ -119,7 +119,10 @@ module Gricer
         .where("\"#{Agent.table_name}\".\"agent_class_id\" IN (?)", [0x1000, 0x2000])
       end
       
-        
+      def self.first_by_id(id)
+        where(id: id).first
+      end  
+          
       # Get the average duration of sessions in seconds.
       #
       # @return [Float]

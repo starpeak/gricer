@@ -119,14 +119,10 @@ module Gricer
         includes("agent")
         .where("\"#{Agent.table_name}\".\"agent_class_id\" IN (?)", [0x1000, 0x2000])
       end
-    
-      # Find or Create Gricer::Agent corrosponding to the given user agent string as given in the HTTP header
-      #
-      # @param agent_header [String] A user agent string as in a HTTP header
-      # @return [Gricer::Agent]
-      def agent_header=(agent_header)
-        self.agent = Agent.find_or_create_by_request_header agent_header
-      end
+      
+      def self.first_by_id(id)
+        where(id: id).first
+      end  
         
       # Init the corrosponding Gricer::Session (called before create)
       #

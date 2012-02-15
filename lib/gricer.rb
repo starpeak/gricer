@@ -9,6 +9,7 @@ require 'gricer/active_model/request'
 
 require 'gricer/mongoid/touch'
 require 'gricer/mongoid/counter_cache'
+require 'gricer/mongoid/map_reduce'
 
 require 'sass'
 require 'compass/rails'

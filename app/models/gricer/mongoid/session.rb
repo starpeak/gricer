@@ -5,6 +5,7 @@ module Gricer
       include ::Mongoid::Timestamps
       include Mongoid::CounterCache
       include Mongoid::Touch
+      include Mongoid::MapReduce
       include ActiveModel::Session
       include ActiveModel::Statistics
       
@@ -40,28 +41,28 @@ module Gricer
       # Filter out anything that is not a Browser or MobileBrowser
       # @return [Mongoid::Criteria]
       def self.browsers
-        #self.all.select {|session| [:browser, :mobile_browser].include? session.agent.agent_class }
-        #self.collection.map_reduce 
-        scoped
+        any_in agent_id: Gricer::Mongoid::Agent.browsers.only(:id).map{|x| x.id}
       end
         
+      def self.first_by_id(id)
+        where('_id' => id).first
+      end  
+      
       # Get the average duration of sessions in seconds.
       #
       # @return [Float]
       def self.avg_duration
-        # if (c = self.count) > 0
-        #    #logger.debug ActiveRecord::Base.connection.class
-        #  
-        #    if ::ActiveRecord::Base.connection.class.to_s == 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
-        #      self.sum("date_part('epoch', \"#{self.table_name}\".\"updated_at\") - date_part('epoch', \"#{self.table_name}\".\"created_at\")").to_f / c.to_f    
-        #    else
-        #      self.sum("strftime('%s', \"#{self.table_name}\".\"updated_at\") - strftime('%s', \"#{self.table_name}\".\"created_at\")") / c.to_f
-        #    end
-        #  else
-        #    0
-        #  end
+        map = "function() { emit(this.id, new Date(this.updated_at) - new Date(this.created_at)) }"
+        reduce = "function (_, xs) { var x = {sum: 0, count: 0}; for (var i=0; i<xs.length; i++) { x.sum += xs[i]; x.count ++ } return x }"
+        finalize = "function (_, x) {return x.sum / x.count }"
         
-        0
+        result = map_reduce map, reduce, finalize: finalize
+        
+        return 0.0 unless result["results"][0]
+        
+        duration = result["results"][0]["value"] / 1000
+        
+        duration.nan? ? 0.0 : duration
        end
       
     end

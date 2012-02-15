@@ -15,7 +15,7 @@ module Gricer
       end
       
       if ['search_engine', 'search_query'].include?(params[:field])
-        @items = @items.where("#{params[:field]} IS NOT NULL")
+        @items = @items.without_nil_in params[:field]
       end
       
       if params[:field] == 'entry_path'

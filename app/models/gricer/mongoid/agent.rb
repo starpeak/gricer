@@ -26,7 +26,7 @@ module Gricer
       # Filter out anything that is not a Browser or MobileBrowser
       # @return [Mongoid::Criteria]
       def self.browsers
-        self.all_in(:agent_class, [:browser, :mobile_browser])
+        self.any_in(agent_class: [:browser, :mobile_browser])
       end
       
       def calculate_agent_info    

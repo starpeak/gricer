@@ -29,7 +29,7 @@ module Gricer
 
           set_callback(:destroy, :after) do |document|
             current_document = document
-            if relation = document.send(options.name) && relation.class.fields.keys.include?(counter_field)
+            if relation = document.send(options.name) && relation && relation.class.fields.keys.include?(counter_field)
               relation.inc(counter_field, -1)
             end
           end

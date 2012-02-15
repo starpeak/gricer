@@ -12,8 +12,8 @@ describe Gricer::CaptureController do
           gricer_session = mock_model(Gricer::ActiveRecord::Session)
           gricer_request = mock_model(Gricer::ActiveRecord::Request, session: gricer_session)
           controller.stub(:session) { { gricer_session: 42 } }
-          Gricer.config.session_model.should_receive(:where).with(id: 42) { [gricer_session] }
-          Gricer.config.request_model.should_receive(:where).with(id: '23') { [gricer_request] }
+          Gricer.config.session_model.should_receive(:first_by_id).with(42) { gricer_session }
+          Gricer.config.request_model.should_receive(:first_by_id).with('23') { gricer_request }
     
           gricer_session.should_receive(:javascript=).with(true)
           gricer_session.should_receive(:java=).with('true')
