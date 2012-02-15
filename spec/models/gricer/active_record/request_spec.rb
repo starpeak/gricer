@@ -51,7 +51,7 @@ describe Gricer::ActiveRecord::Request do
       subject.referer_protocol.should == 'HTTPS'
       subject.referer_host.should == 'my.domain:1234'
       subject.referer_path.should == '/test/path'
-      subject.referer_params.should be_nil
+      subject.referer_params.should == ''
     end    
     
     it 'should get protocol and host if no path and params given' do
@@ -59,7 +59,7 @@ describe Gricer::ActiveRecord::Request do
       subject.referer_protocol.should == 'HTTP'
       subject.referer_host.should == 'my.domain:1234'
       subject.referer_path.should == '/'
-      subject.referer_params.should be_nil
+      subject.referer_params.should == ''
     end  
     
     it 'should normalise hosts' do
@@ -85,6 +85,12 @@ describe Gricer::ActiveRecord::Request do
       subject.referer = 'http://www.google.com/search?q=test%20this&ie=utf-8&oe=utf-8'
       subject.search_engine.should == 'Google'
       subject.search_query.should == 'test this'
+    end
+    
+    it 'should detect Google as Search Engine without q param' do
+      subject.referer = 'http://www.google.com/search'
+      subject.search_engine.should == 'Google'
+      subject.search_query.should be_nil
     end
     
     it 'should detect Google (UK) as Search Engine' do
