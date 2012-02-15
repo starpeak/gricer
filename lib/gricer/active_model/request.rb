@@ -58,8 +58,8 @@ module Gricer
           self.referer_protocol = referer_protocol.try(:upcase)
           self.referer_host = referer_host.try(:downcase)
           self.referer_path = '/' if referer_path.blank?
-          self.referer_params = nil if referer_params.blank?
-          params = CGI::parse(referer_params) unless referer_params.blank?
+          self.referer_params = '' if referer_params.blank?
+          params = CGI::parse(referer_params) 
         
           # Detect Search Engines
           if referer_host =~ /^www\.google(?:\.com?)?(?:\.[a-z]{2})?$/ and ['/search', '/url'].include? referer_path
