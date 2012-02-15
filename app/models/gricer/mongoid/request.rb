@@ -44,9 +44,6 @@ module Gricer
       belongs_to :session, class_name: 'Gricer::Mongoid::Session', counter_cache: true
       belongs_to :agent, class_name: 'Gricer::Mongoid::Agent', counter_cache: true
       
-      #counter_cache :agent
-      #counter_cache :session
-      
       before_create :init_session
       
       # Filter out anything that is not a Browser or MobileBrowser

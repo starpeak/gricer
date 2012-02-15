@@ -1,36 +1,45 @@
 require 'spec_helper'
 
 describe Gricer::RequestsController do
-  context 'process_stats' do
-    it 'should render json' do
-      xhr :get, :process_stats, field: :path
-      response.should be_success
-      response.content_type.should == 'application/json'
-    end
-  end
+  [:ActiveRecord, :Mongoid].each do |model_type|
+    context "Running for #{model_type} models" do
+      before :all do
+        Gricer.config.model_type = model_type
+      end
   
-  context 'spread_stats' do
-    it 'should render json' do
-      xhr :get, :spread_stats, field: :path
-      response.should be_success
-      response.content_type.should == 'application/json'
-    end
-  end
+      context 'process_stats' do
+        it 'should render json' do
+          xhr :get, :process_stats, field: :path
+          response.should be_success
+          response.content_type.should == 'application/json'
+        end
+      end
   
-  context 'basic_collection' do
-    it 'should define basic collection' do
-      Gricer::ActiveRecord::Request.should_receive(:browsers) { 'collection' }    
-      collection = controller.send(:basic_collection)
-      collection.should == 'collection'    end
-  end
+      context 'spread_stats' do
+        it 'should render json' do
+          xhr :get, :spread_stats, field: :path
+          response.should be_success
+          response.content_type.should == 'application/json'
+        end
+      end
   
-  context 'further_details' do
-    it 'should return a hash' do
-      controller.send(:further_details).class.should == Hash
-    end
+      context 'basic_collection' do
+        it 'should define basic collection' do
+          Gricer.config.request_model.should_receive(:browsers) { 'collection' }    
+          collection = controller.send(:basic_collection)
+          collection.should == 'collection'    
+        end
+      end
+  
+      context 'further_details' do
+        it 'should return a hash' do
+          controller.send(:further_details).class.should == Hash
+        end
     
-    it 'should have many entries' do
-      controller.send(:further_details).size.should > 1
+        it 'should have many entries' do
+          controller.send(:further_details).size.should > 1
+        end
+      end
     end
   end
 end

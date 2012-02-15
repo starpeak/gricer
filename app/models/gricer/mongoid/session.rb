@@ -37,8 +37,6 @@ module Gricer
       belongs_to :agent, class_name: 'Gricer::Mongoid::Agent', foreign_key: :agent_id, counter_cache: true
       belongs_to :previous_session, class_name: 'Gricer::Mongoid::Session', foreign_key: :previous_session_id
     
-      #counter_cache :agent
-    
       # Filter out anything that is not a Browser or MobileBrowser
       # @return [Mongoid::Criteria]
       def self.browsers
