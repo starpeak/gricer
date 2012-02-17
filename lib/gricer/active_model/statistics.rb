@@ -93,22 +93,22 @@ module Gricer
             end
           else 
             
-            scoped
-            
+            raise "grouped_by not yet implemented for #{model_type}"
+                
           end
         end        
 
         # Count records by attribute.
         # 
         # @param attribute [String, Symbol] Attribute name to count for. You can use gricers extended attribute names.
-        # @return [ActiveRecord::Relation/Mongoid::Criteria] 
+        # @return [Array] 
         def count_by(attribute)
+          parts = attribute.to_s.split('.')
+          
           if self.is_active_record?
             self.grouped_by(attribute).count(:id).sort{ |a,b| b[1] <=> a[1] }
           else
             results = {}
-            
-            parts = attribute.to_s.split('.')
             
             if parts[1].blank?
               scoped.each do |item|
@@ -119,7 +119,12 @@ module Gricer
             else
               if association = self.reflect_on_association(parts[0].to_sym)          
                 scoped.each do |item|
-                  value = item.send(association.name).send(parts[1])
+                  if item.send(association.name).nil?
+                    value = nil
+                  else
+                    value = item.send(association.name).send(parts[1])
+                  end
+                  
                   results[value] ||= 0
                   results[value] += 1
                 end
@@ -149,15 +154,28 @@ module Gricer
           if parts[1].blank?
             self.where(attribute => value)
           else
-            if association = self.reflect_on_association(parts[0].to_sym)          
-              self.includes(association.name)
-              .where(association.table_name => {parts[1] => value})
+            if association = self.reflect_on_association(parts[0].to_sym)   
+              case model_type
+                when :ActiveRecord 
+                  self.includes(association.name)
+                  .where(association.table_name => {parts[1] => value})
+                when :Mongoid
+                  any_in association.key => association.class_name.constantize.where(parts[1] => value).only(:id).map{|x| x.id}
+                else
+                  raise "Model type '#{model_type}' is not defined for filter_by in Gricer::ActiveModel::Statistics"
+              end
             else
               raise "Association '#{parts[0]}' not found on #{self.name}"
             end
           end
         end
         
+        # Filter out records with nil value in given attribute
+        #
+        # @example
+        #   some_relation.without_nil_in('name')
+        # @param attribute [String, Symbol] Attribute name to filter.
+        # @return [ActiveRecord::Relation/Mongoid::Criteria] 
         def without_nil_in(attribute, options = {})
           if model_type == :Mongoid
             excludes(attribute => nil)
@@ -199,7 +217,7 @@ module Gricer
         # @param step [Integer] Time interval for grouping values
         # @return [Hash]
         def stat(attribute, from, thru, step = 1.hour)
-          query = self.grouped_by(attribute)
+          #query = self.grouped_by(attribute)
           
           from = from.to_date.to_time
           thru = thru.to_date.to_time+1.day

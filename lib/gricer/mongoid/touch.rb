@@ -1,10 +1,7 @@
 module Gricer
   module Mongoid
     module Touch
-      extend ActiveSupport::Concern
-    
-      included do
-      end
+      #extend ActiveSupport::Concern
     
       module InstanceMethods
     
