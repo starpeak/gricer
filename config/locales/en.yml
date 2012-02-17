@@ -1,35 +1,35 @@
 en:
   gricer:
     description: 'Gricer Web Analysis'
-    menu:
-      overview: "Overview"
-      visitors: "Visitors"
-      visitors_items:
-        entry_pages: "Entry Pages"
-        referers: "Refering Pages"
-        search_engines: "Seach Engines"
-        search_terms: "Search Terms"
-        countries: "Countries"
-        domains: "Domains"
-        locales: "Languages"
-      pages: "Pages"
-      pages_items:
-        views: "Page Views"
-        hosts: "Host Names"
-        methods: "Methods"
-        protocols: "Protocols"
-      browsers: "Browsers"
-      browsers_items: 
-        browsers: "Programs"
-        operating_systems: "Operating Systems"
-        engines: "Engines"
-        javascript: "JavaScript"
-        java: "Java"
-        silverlight: "Silverlight"
-        flash: "Flash"
-        screen_sizes: "Screen Sizes"
-        color_depths: "Color Depths"
     dashboard:
+      menu:
+        overview: "Overview"
+        visitors: "Visitors"
+        visitors_items:
+          entry_pages: "Entry Pages"
+          referers: "Refering Pages"
+          search_engines: "Seach Engines"
+          search_terms: "Search Terms"
+          countries: "Countries"
+          domains: "Domains"
+          locales: "Languages"
+        pages: "Pages"
+        pages_items:
+          views: "Page Views"
+          hosts: "Host Names"
+          methods: "Methods"
+          protocols: "Protocols"
+        browsers: "Browsers"
+        browsers_items: 
+          browsers: "Programs"
+          operating_systems: "Operating Systems"
+          engines: "Engines"
+          javascript: "JavaScript"
+          java: "Java"
+          silverlight: "Silverlight"
+          flash: "Flash"
+          screen_sizes: "Screen Sizes"
+          color_depths: "Color Depths"
       overview:
         title: 'Overview for %{from} to %{thru}'
         title_day: 'Overview for %{from}'

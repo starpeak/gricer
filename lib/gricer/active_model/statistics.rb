@@ -40,7 +40,7 @@ module Gricer
       module ClassMethods
         # Find out which model type is used in this class
         def is_active_record?
-          self.superclass == ::ActiveRecord::Base
+          defined?(::ActiveRecord) and self.superclass == ::ActiveRecord::Base
         end        
         
         def model_type
