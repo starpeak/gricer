@@ -59,14 +59,17 @@
     background: #dfe4eb;
     border-right: 1px solid #b4b4b4;
     top: 20px;
-    
+    color: #000;
     bottom: 0;
     overflow: auto;
     
+    a {
+      color: #000;
+    }
+    
     a, span {
       display: block;
-      text-decoration: none;
-      color: #000;
+      text-decoration: none;   
       border-top: 1px solid transparent;
       padding: 2px 8px;
       &.active {
@@ -77,9 +80,13 @@
       }
     }
     
-    span {
+    span.section {
       color: #999;
       font-weight: bold;
+    }
+    
+    span.translation_missing {
+      padding: 0;
     }
     
     div a {

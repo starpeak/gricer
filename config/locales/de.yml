@@ -1,0 +1,48 @@
+de:
+  gricer:
+    description: 'Gricer Web Analyse'
+    dashboard:
+      menu:
+        overview: "Übersicht"
+        visitors: "Besucher"
+        visitors_items:
+          entry_pages: "Einstiegseiten"
+          referers: "Verweisende Seiten"
+          search_engines: "Suchmaschinen"
+          search_terms: "Suchbegriffe"
+          countries: "Länder"
+          domains: "Domains"
+          locales: "Sprachen"
+        pages: "Seiten"
+        pages_items:
+          views: "Aufrufe"
+          hosts: "Servernamen"
+          methods: "Methoden"
+          protocols: "Protokolle"
+        browsers: "Browser"
+        browsers_items: 
+          browsers: "Programme"
+          operating_systems: "Betriebsysteme"
+          engines: "Engines"
+          javascript: "JavaScript"
+          java: "Java"
+          silverlight: "Silverlight"
+          flash: "Flash"
+          screen_sizes: "Bildschirmauflösungen"
+          color_depths: "Farbtiefen"
+      overview:
+        title: 'Übersicht für %{from} bis %{thru}'
+        title_day: 'Übersicht für den %{from}'
+        sessions: 
+          one: '%{count} Besuch'
+          other: '%{count} Besuche'
+        requests:
+          one: '%{count} Seitenaufruf'
+          other: '%{count} Seitenaufrufe'
+        requests_per_session: '%{count} Seiten/Besuch'
+        bounce_rate: '%{percentage} Abspringrate'
+        avg_duration: '%{time} durchschnittliche Verweildauer'
+        new_visitors: '%{percentage} neue Besucher'
+        new_sessions:
+          one: '%{count} neuer Besucher'
+          other: '%{count} neue Besucher'

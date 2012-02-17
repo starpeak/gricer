@@ -60,32 +60,32 @@ module Gricer
     # @return [Array] 
     def admin_menu 
       @admin_menu ||= [
-        ['Overview', :dashboard, {controller: 'gricer/dashboard', action: 'overview'}],
-        ['Visitors', :menu, [
-          ['Entry Pages', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'entry_path'}],
-          ['Referers', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'referer_host'}],
-          ['Search Engines', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'search_engine'}],
-          ['Search Terms', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'search_query'}],
-          ['Countries', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'country'}],
-          ['Domains', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'domain'}],
-          ['Locales', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'requested_locale_major'}]
+        ['overview', :dashboard, {controller: 'gricer/dashboard', action: 'overview'}],
+        ['visitors', :menu, [
+          ['entry_pages', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'entry_path'}],
+          ['referers', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'referer_host'}],
+          ['search_engines', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'search_engine'}],
+          ['search_terms', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'search_query'}],
+          ['countries', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'country'}],
+          ['domains', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'domain'}],
+          ['locales', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'requested_locale_major'}]
         ] ],
-        ['Pages', :menu, [
-          ['Views', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'path'}],
-          ['Hosts', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'host'}],
-          ['Methods', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'method'}],
-          ['Protocols', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'protocol'}],
+        ['pages', :menu, [
+          ['views', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'path'}],
+          ['hosts', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'host'}],
+          ['methods', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'method'}],
+          ['protocols', :spread, {controller: 'gricer/requests', action: 'spread_stats', field: 'protocol'}],
         ] ],
-        ['Browsers', :menu, [
-          ['Browsers', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'agent.name'}],
-          ['Operating Systems', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'agent.os'}],
-          ['Engines', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'agent.engine_name'}],
-          ['JavaScript', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'javascript'}],
-          ['Java', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'java'}],
-          ['Silverlight', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'silverlight_major_version'}],
-          ['Flash', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'flash_major_version'}],
-          ['Screen Size', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'screen_size'}],
-          ['Color Depth', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'screen_depth'}]
+        ['browsers', :menu, [
+          ['browsers', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'agent.name'}],
+          ['operating_systems', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'agent.os'}],
+          ['engines', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'agent.engine_name'}],
+          ['javascript', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'javascript'}],
+          ['java', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'java'}],
+          ['silverlight', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'silverlight_major_version'}],
+          ['flash', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'flash_major_version'}],
+          ['screen_sizes', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'screen_size'}],
+          ['color_depths', :spread, {controller: 'gricer/sessions', action: 'spread_stats', field: 'screen_depth'}]
         ] ]
       ]
     end

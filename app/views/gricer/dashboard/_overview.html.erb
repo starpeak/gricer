@@ -1,8 +1,9 @@
 <div class='overview'>
   <h2>
-    Overview for <%=l @stat_from%>
-    <% unless @stat_from == @stat_thru -%>
-      to <%=l @stat_thru%>
+    <% if @stat_thru.blank? or @stat_from == @stat_thru -%>
+      <%=t '.title_day', from: l(@stat_from) %>
+    <% else -%>
+      <%=t '.title', from: l(@stat_from), thru: l(@stat_thru) %>
     <% end -%>
   </h2>
   

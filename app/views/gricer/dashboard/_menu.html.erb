@@ -1,10 +1,11 @@
+<% prefix ||= '' %>
 <% items.each do |item| -%>
   <% if item[1].to_sym == :menu -%>
     <div>
-      <span><%= item[0] %></span>
-      <%= render 'menu', items: item[2] %>
+      <span class="section"><%=t "#{prefix}.#{item[0]}" %></span>
+      <%= render 'menu', items: item[2], prefix: "#{prefix}.#{item[0]}_items" %>
     </div>
   <% else -%>
-    <%= link_to item[0], item[2], "data-gricer-#{item[1]}" => true %>
+    <%= link_to t("#{prefix}.#{item[0]}"), item[2], "data-gricer-#{item[1]}" => true %>
   <% end -%>
 <% end -%>
