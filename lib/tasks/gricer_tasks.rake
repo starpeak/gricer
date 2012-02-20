@@ -26,7 +26,7 @@ namespace :gricer do
     end
   
     namespace :migrate do
-      desc  'Rollbacks the database one migration and re migrate up. If you want to rollback more than one step, define STEP=x. Target specific version with VERSION=x.'
+      desc 'Rollbacks the database one migration and re migrate up. If you want to rollback more than one step, define STEP=x. Target specific version with VERSION=x.'
       task :redo => [:environment, :prepare_namespace] do
         if ENV["VERSION"]
           Rake::Task["gricer:db:migrate:down"].invoke

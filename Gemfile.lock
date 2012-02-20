@@ -135,6 +135,7 @@ GEM
       rspec (~> 2)
     multi_json (1.0.4)
     nokogiri (1.5.0)
+    pg (0.13.1)
     polyglot (0.3.3)
     pry (0.9.8.2)
       coderay (~> 1.0.5)
@@ -230,6 +231,7 @@ DEPENDENCIES
   launchy
   mongoid (>= 2.4)
   mongoid-rspec
+  pg
   pry
   rails (~> 3.2.1)
   rb-fsevent

@@ -19,9 +19,10 @@ else
  gem 'jquery-rails'
 end
 
-# SQLite for ActiveRecord flavoured models
+# SQLite and PG for ActiveRecord flavoured model tests
 gem 'sqlite3'
-# Mongoid for Mongoid flavoured models
+gem 'pg'
+# Mongoid for Mongoid flavoured model tests
 gem "mongoid", ">= 2.4"
 gem "bson_ext", ">= 1.5"
 
@@ -36,9 +37,13 @@ group :test do
   gem 'jasmine'
 end
 
+group :development do
+  gem 'pry'
+  gem 'yard'
+end
+
 group :test, :development do
   # gem 'ruby-debug19', require: 'ruby-debug'
-  gem 'pry'
   gem 'fabrication'
   gem 'launchy'
   gem 'faker'
@@ -47,7 +52,6 @@ group :test, :development do
   gem 'timecop'
   gem 'jasminerice'
   gem 'guard-shell'
-  gem 'yard'
   
   if RUBY_PLATFORM =~ /darwin/i
     gem 'growl_notify'

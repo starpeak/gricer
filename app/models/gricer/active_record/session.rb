@@ -102,9 +102,9 @@ module Gricer
       include ActiveModel::Session
       include ActiveModel::Statistics
     
-      has_many :requests, class_name: 'Gricer::ActiveRecord::Request', foreign_key: :session_id, order: 'created_at ASC'
-      belongs_to :agent, class_name: 'Gricer::ActiveRecord::Agent', foreign_key: :agent_id, counter_cache: true
-      belongs_to :previous_session, class_name: 'Gricer::ActiveRecord::Session', foreign_key: :previous_session_id
+      has_many :requests, class_name: '::Gricer::ActiveRecord::Request', foreign_key: :session_id, order: 'created_at ASC'
+      belongs_to :agent, class_name: '::Gricer::ActiveRecord::Agent', foreign_key: :agent_id, counter_cache: true
+      belongs_to :previous_session, class_name: '::Gricer::ActiveRecord::Session', foreign_key: :previous_session_id
     
       # Filter out only new visits (which does not have a previous_session)
       # @return [ActiveRecord::Relation]

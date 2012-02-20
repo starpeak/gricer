@@ -9,7 +9,7 @@ module Gricer
       field :sessions_count, type: Integer
       
       field :request_header, type: String
-      field :agent_class, type: String
+      field :agent_class, type: Symbol
       field :name, type: String
       field :full_version, type: String
       field :major_version, type: String

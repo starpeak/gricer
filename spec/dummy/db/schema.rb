@@ -13,6 +13,17 @@
 
 ActiveRecord::Schema.define(:version => 20110819130712) do
 
+  create_table "active_record_parent_models", :force => true do |t|
+    t.string "version"
+  end
+
+  create_table "active_record_stat_models", :force => true do |t|
+    t.integer  "parent_id"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "agents", :force => true do |t|
     t.integer "requests_count"
     t.integer "sessions_count"

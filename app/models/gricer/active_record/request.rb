@@ -108,8 +108,8 @@ module Gricer
       include ActiveModel::Request
       include ActiveModel::Statistics
     
-      belongs_to :session, class_name: 'Gricer::ActiveRecord::Session', counter_cache: true
-      belongs_to :agent, class_name: 'Gricer::ActiveRecord::Agent', counter_cache: true
+      belongs_to :session, class_name: '::Gricer::ActiveRecord::Session', counter_cache: true
+      belongs_to :agent, class_name: '::Gricer::ActiveRecord::Agent', counter_cache: true
     
       before_create :init_session
     

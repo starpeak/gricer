@@ -11,7 +11,7 @@ RSpec::Core::RakeTask.new(:spec)
 require 'cucumber/rake/task'
 Cucumber::Rake::Task.new(:cucumber)
 
-task :spec => ['app:db:migrate', 'app:db:test:prepare']
+task :spec #=> ['app:db:migrate:test']
 
 desc "Run RSpec and Cucumber tests"
 task :test => [:spec, :cucumber]
@@ -23,7 +23,7 @@ namespace :doc do
   
     YARD::Rake::YardocTask.new(:yard) do |t|
       t.files   = ['lib/**/*.rb', 'app/**/*.rb', '-', 'README.rdoc', 'MIT-LICENSE']
-      t.options = ['--title', 'API - Gricer - Web Analytics Tool for Rails 3.1', '--private', '--protected'] 
+      t.options = ['--title', 'API - Gricer - Web Analytics Tool for Rails 3.1/3.2', '--private', '--protected'] 
     end
   rescue
   end

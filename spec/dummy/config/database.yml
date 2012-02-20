@@ -18,8 +18,11 @@ test:
   pool: 5
   timeout: 5000
 
-production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+test_pg:
+  adapter: postgresql
+  encoding: unicode
+  database: gricer_test
   pool: 5
-  timeout: 5000
+  username: gricer
+  password: gricer
+  host: 127.0.0.1  
