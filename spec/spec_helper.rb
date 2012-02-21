@@ -55,12 +55,18 @@ module Models
   end
 end
 
-def for_all_databases &block
-  [
+def for_all_databases options = {}, &block
+  cases = [
     [:ActiveRecord, :SQLite], 
     [:ActiveRecord, :PostgreSQL], 
     [:Mongoid, nil]
-  ].each do |model_type|    
+  ]
+  
+  if options[:only_active_record]
+    cases.select!{|x| x[0] == :ActiveRecord}
+  end
+  
+  cases.each do |model_type|    
     model_type_group = context "Running for #{model_type[0]} models#{model_type[1] ? " with #{model_type[1]}" : ''}" do
       before :all do
         Gricer.config.model_type = model_type[0]

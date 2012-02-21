@@ -101,6 +101,7 @@ module Gricer
       self.table_name = "#{::Gricer::config.table_name_prefix}sessions"
       include ActiveModel::Session
       include ActiveModel::Statistics
+      include ActiveRecord::LimitStrings
     
       has_many :requests, class_name: '::Gricer::ActiveRecord::Request', foreign_key: :session_id, order: 'created_at ASC'
       belongs_to :agent, class_name: '::Gricer::ActiveRecord::Agent', foreign_key: :agent_id, counter_cache: true

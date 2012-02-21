@@ -7,9 +7,15 @@ require 'gricer/active_model/statistics'
 require 'gricer/active_model/session'
 require 'gricer/active_model/request'
 
-require 'gricer/mongoid/touch'
-require 'gricer/mongoid/counter_cache'
-require 'gricer/mongoid/map_reduce'
+if defined? ActiveRecord
+  require 'gricer/active_record/limit_strings'
+end
+
+#if defined? Mongoid
+  require 'gricer/mongoid/touch'
+  require 'gricer/mongoid/counter_cache'
+  require 'gricer/mongoid/map_reduce'
+#end
 
 require 'sass'
 require 'compass/rails'

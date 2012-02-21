@@ -107,6 +107,7 @@ module Gricer
       self.table_name = "#{::Gricer::config.table_name_prefix}requests"
       include ActiveModel::Request
       include ActiveModel::Statistics
+      include ActiveRecord::LimitStrings
     
       belongs_to :session, class_name: '::Gricer::ActiveRecord::Session', counter_cache: true
       belongs_to :agent, class_name: '::Gricer::ActiveRecord::Agent', counter_cache: true

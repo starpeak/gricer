@@ -32,6 +32,7 @@ module Gricer
     class Agent < ::ActiveRecord::Base    
       self.table_name = "#{::Gricer::config.table_name_prefix}agents"
       include ActiveModel::Statistics
+      include ActiveRecord::LimitStrings
     
       has_many :requests, class_name: '::Gricer::ActiveRecord::Request', foreign_key: :agent_id, order: 'created_at ASC'
       has_many :sessions, class_name: '::Gricer::ActiveRecord::Session', foreign_key: :session_id, order: 'created_at ASC'
