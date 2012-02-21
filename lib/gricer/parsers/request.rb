@@ -14,7 +14,9 @@ module Gricer
         info[:protocol]     = request.protocol.sub(/[:\/]*$/, '').upcase
         info[:locale]       = I18n.locale
 
-        info[:req_locale]   = request.headers['HTTP_ACCEPT_LANGUAGE'].try(:scan, /[^,;]+/).try(:first)
+        info[:req_locale]   = " #{request.headers['HTTP_ACCEPT_LANGUAGE']} "
+                              .match(/[^A-Za-z1-9]([A-Za-z]{2}(-[A-Za-z]{2})?)[^A-Za-z1-9]/)
+                              .to_a[1]
 
         return info
       end
