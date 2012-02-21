@@ -4,6 +4,8 @@ gemspec
 
 if true
   gem "rails",              '~>3.2.1'
+  gem 'compass-rails'
+  gem 'sass-rails',         '~> 3.2'
 else
   gem "rails",              '~>3.1.3'
 
