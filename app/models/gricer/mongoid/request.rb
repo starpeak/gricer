@@ -55,6 +55,15 @@ module Gricer
       def self.first_by_id(id)
         where('_id' => id).first
       end  
+      
+      # Find or Create Gricer::Agent corrosponding to the given user agent string as given in the HTTP header
+      #
+      # @param agent_header [String] A user agent string as in a HTTP header
+      # @return [Gricer::Agent]
+      def agent_header=(agent_header)
+        self.agent = "Gricer::#{model_type}::Agent".constantize.find_or_create_by request_header: agent_header
+      end
+      
 
       # Init the corrosponding Gricer::Session (called before create)
       #

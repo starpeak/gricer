@@ -52,7 +52,7 @@ module Gricer
       # @param agent_header [String] A user agent string as in a HTTP header
       # @return [Gricer::Agent]
       def agent_header=(agent_header)
-        self.agent = "Gricer::#{model_type}::Agent".constantize.find_or_create_by request_header: agent_header
+        self.agent = "Gricer::#{model_type}::Agent".constantize.find_or_create_by_request_header agent_header
       end
       
       # Parse the referer to fill referer and search engine attributes
