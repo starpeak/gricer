@@ -1,5 +1,5 @@
 module Gricer
-  if defined? Mongoid
+  if defined? ::Mongoid
     module Mongoid
       class Request
         include ::Mongoid::Document

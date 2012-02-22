@@ -1,5 +1,5 @@
 module Gricer
-  if defined? Mongoid
+  if defined? ::Mongoid
     module Mongoid
       class Agent
         include ::Mongoid::Document

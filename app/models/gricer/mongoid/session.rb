@@ -1,5 +1,5 @@
 module Gricer
-  if defined? Mongoid
+  if defined? ::Mongoid
     module Mongoid
       class Session
         include ::Mongoid::Document
