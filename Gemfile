@@ -3,18 +3,18 @@ source "http://rubygems.org"
 gemspec
 
 if true
-  gem "rails",              '~>3.2.1'
+  gem "rails",              '>3.2.1'
   gem 'compass-rails'
-  gem 'sass-rails',         '~> 3.2'
+  gem 'sass-rails',         '> 3.2'
 else
-  gem "rails",              '~>3.1.3'
+  gem "rails",              '>3.1.3'
 
   # Gems used only for assets and not required
   # in production environments by default.
   group :assets do
-   gem 'sass-rails',       '~> 3.1'
+   gem 'sass-rails',       '> 3.1'
    gem 'compass-rails'
-   gem 'coffee-rails',     '~> 3.1'
+   gem 'coffee-rails',     '> 3.1'
    gem 'uglifier'
  end
  
