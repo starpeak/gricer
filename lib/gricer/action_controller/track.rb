@@ -83,7 +83,7 @@ module Gricer
     
     def gricer_track_tag
       if gricer_request and defined?(gricer_capture_path)
-        content_tag :script, "jQuery(function($) {$.post('#{gricer_capture_path(gricer_request.id)}', Gricer.prepareValues());});", type: 'text/javascript'
+        content_tag :script, "jQuery(function($) {$.post('#{gricer_capture_path(gricer_request.id)}', Gricer.prepareValues());});", {type: 'text/javascript'}, false
       end
     end
   end

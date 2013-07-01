@@ -103,7 +103,7 @@ $.gricer =
   
     $('#gricer-header .path').append( $(elem).clone().attr('data-label', label).html(label) )
   
-$('a[data-gricer-process]').live 'click', ->
+$('body').on 'click', 'a[data-gricer-process]', ->
   $.gricer.loading()
   $.gricer.updateBreadcrumb(this)
   
@@ -209,7 +209,7 @@ $('a[data-gricer-process]').live 'click', ->
         
   return false
   
-$('a[data-gricer-spread]').live 'click', ->
+$('body').on 'click', 'a[data-gricer-spread]', ->
   $.gricer.loading()
   $.gricer.updateBreadcrumb(this)
   
@@ -312,7 +312,7 @@ $('a[data-gricer-spread]').live 'click', ->
 
   return false
   
-$('a[data-gricer-dashboard]').live 'click', ->
+$('body').on 'click', 'a[data-gricer-dashboard]', ->
   $.gricer.loading()
   $.gricer.updateBreadcrumb(this)
 
@@ -322,7 +322,7 @@ $('a[data-gricer-dashboard]').live 'click', ->
 
   return false
   
-$('#gricer-menu a').live 'click', ->
+$('body').on 'click', '#gricer-menu a', ->
   $('#gricer-menu a.active').removeClass('active')
   $(this).addClass('active')
   return false
