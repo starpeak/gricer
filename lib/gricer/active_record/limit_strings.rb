@@ -8,7 +8,7 @@ module Gricer
       protected
       def crop_strings_to_sql_limit
         self.class.columns.each do |column|
-          if column.type == :string
+          if column.type == :string and column.limit
             if self.send(column.name) and self.send(column.name).size > column.limit
               self.send("#{column.name}=", self.send(column.name)[0..column.limit-1])
             end

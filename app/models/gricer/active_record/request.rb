@@ -120,6 +120,7 @@ module Gricer
         def self.browsers
           includes("agent")
           .where("\"#{Agent.table_name}\".\"agent_class_id\" IN (?)", [0x1000, 0x2000])
+          .references(Agent.table_name)
         end
       
         def self.first_by_id(id)

@@ -104,7 +104,7 @@ module Gricer
         include ActiveModel::Statistics
         include ActiveRecord::LimitStrings
     
-        has_many :requests, class_name: '::Gricer::ActiveRecord::Request', foreign_key: :session_id, order: 'created_at ASC'
+        has_many :requests, -> {order(created_at: :asc)}, class_name: '::Gricer::ActiveRecord::Request', foreign_key: :session_id
         belongs_to :agent, class_name: '::Gricer::ActiveRecord::Agent', foreign_key: :agent_id, counter_cache: true
         belongs_to :previous_session, class_name: '::Gricer::ActiveRecord::Session', foreign_key: :previous_session_id
     
@@ -119,6 +119,7 @@ module Gricer
         def self.browsers
           self.includes("agent")
           .where("\"#{Agent.table_name}\".\"agent_class_id\" IN (?)", [0x1000, 0x2000])
+          .references(Agent.table_name)
         end
       
         def self.first_by_id(id)

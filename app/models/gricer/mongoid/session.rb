@@ -34,8 +34,10 @@ module Gricer
         field :screen_depth, type: Integer
         field :requested_locale_major, type: String
         field :requested_locale_minor, type: String
-      
-        has_many :requests, class_name: 'Gricer::Mongoid::Request', foreign_key: :session_id, order: 'created_at ASC'
+
+        default_scope { order(created_at: :asc) }
+              
+        has_many :requests, class_name: 'Gricer::Mongoid::Request', foreign_key: :session_id
         belongs_to :agent, class_name: 'Gricer::Mongoid::Agent', foreign_key: :agent_id, counter_cache: true
         belongs_to :previous_session, class_name: 'Gricer::Mongoid::Session', foreign_key: :previous_session_id
     

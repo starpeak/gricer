@@ -4,7 +4,7 @@ module Gricer
     # Around-Filter for tracking requests in Gricer
     # @param controller The controller from which this Filter was included.
     # @yield The controller's code block
-    def self.filter(controller, &block)
+    def self.around(controller, &block)
       if controller.controller_path =~ /^gricer\// or controller.request.path =~ ::Gricer.config.exclude_paths
         Rails.logger.debug "Gricer Track Request: Do not track '#{controller.controller_path}##{controller.action_name}' by config"
         block.call
@@ -105,7 +105,7 @@ module Gricer
     module Tracker
       # Include the helper functions and around_filter into controllers.
       def self.included(base)
-        base.append_around_filter TrackRequestFilter
+        base.append_around_action TrackRequestFilter
         base.helper TrackHelper
         base.helper_method :gricer_request
       end

@@ -106,7 +106,7 @@ module Gricer
           parts = attribute.to_s.split('.')
           
           if self.is_active_record?
-            self.grouped_by(attribute).count(:id).sort{ |a,b| b[1] <=> a[1] }
+            query = self.grouped_by(attribute).count(:id).sort{ |a,b| b[1] <=> a[1] }
           else
             results = {}
             

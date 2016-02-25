@@ -35,8 +35,8 @@ module Gricer
         include ActiveModel::Statistics
         include ActiveRecord::LimitStrings
     
-        has_many :requests, class_name: '::Gricer::ActiveRecord::Request', foreign_key: :agent_id, order: 'created_at ASC'
-        has_many :sessions, class_name: '::Gricer::ActiveRecord::Session', foreign_key: :session_id, order: 'created_at ASC'
+        has_many :requests, -> {order(created_at: :asc)}, class_name: '::Gricer::ActiveRecord::Request', foreign_key: :agent_id
+        has_many :sessions, -> {order(created_at: :asc)}, class_name: '::Gricer::ActiveRecord::Session', foreign_key: :session_id
     
         before_create :calculate_agent_info
     
